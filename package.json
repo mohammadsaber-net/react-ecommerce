@@ -1,7 +1,6 @@
 {
   "name": "myapp",
   "version": "0.1.0",
-  "homepage": "https://mohammadsaber-net.github.io/react-ecommerce",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -35,14 +34,14 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "predeploy": "npm run build",
   "deploy": "gh-pages -d build --repo=https://github.com/mohammadsaber-net/react-ecommerce.git"
-
-  },
+}
+,
   "eslintConfig": {
     "extends": [
       "react-app",
