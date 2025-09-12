@@ -1,0 +1,39 @@
+.parent{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    z-index: 100000;
+    background-color: rgba(242, 27, 250);
+}
+.loader {
+    position: relative;
+    width:  80px;
+    height: 80px;
+    background: #de3500;
+    transform: rotateX(65deg) rotate(45deg);
+    transform: perspective(200px) rotateX(65deg) rotate(45deg); 
+    color: #ffffff;
+    animation: layers1 1s linear infinite alternate;
+  }
+  .loader:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    animation: layerTr 1s linear infinite alternate;
+  }
+
+  @keyframes layers1 {
+    0% { box-shadow: 0px 0px 0 0px  }
+   90% , 100% { box-shadow: 20px 20px 0 -4px  }
+  }
+  @keyframes layerTr {
+    0% { transform:  translate(0, 0) scale(1) }
+    100% {  transform: translate(-25px, -25px) scale(1) }
+  }
+      

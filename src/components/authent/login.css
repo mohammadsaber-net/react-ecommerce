@@ -1,0 +1,105 @@
+.form-login{
+    border: 2px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(250, 250, 244);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 80px;
+    width: fit-content;
+}
+
+.form-login label{
+    width :120px;
+    background-color: #eceaea;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-right: 10px;
+}
+/* .form-login:not(:nth-child(3)) label{
+    margin-right: 50px;
+} */
+
+.form-login input,.inputPhoneInput{
+    border: 1px solid #6ec7ff;
+    border-radius: 5px;
+    width: 350px !important;
+    height: 40px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+@media (max-width:440px){
+  .form-login{
+    padding: 5px;
+  }
+    .form-login label{
+        font-size: .8rem;
+        max-width:60px ;
+    }
+    .form-login input,.inputPhoneInput{
+      width: 180px !important;
+      
+    }
+}
+  .phoneInput{
+    width: 100%;
+    border: 1px solid #6ec7ff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .custom-phone-button {
+  border: 1px solid #ced4da;
+  border-right: none;
+  background-color: #f8f9fa;
+}
+
+.form-login input:focus{
+    outline: none;
+}
+.Submit-loading {
+  width: 25px;
+  height: 25px;
+  border: 2px dotted #FFF;
+  border-style: solid solid dotted dotted;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+.Submit-loading::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px dotted #FF3D00;
+  border-style: solid solid dotted;
+  width: 12.5px;
+  height: 12.5px;
+  border-radius: 50%;
+  animation: rotationBack 1s linear infinite;
+  transform-origin: center center;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+} 

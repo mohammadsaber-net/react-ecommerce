@@ -1,0 +1,73 @@
+.sub-container{
+    background-color: #fbf3f3;
+    margin: auto;
+    margin-top: 50px;
+    padding-top: 10px;
+}
+.choose-method{
+    width: 250px;
+}
+.choose-method >label{
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.choose-method>label:hover{
+    background-color: #f0f0f0;
+    border-color:#43fafa;
+}
+.vodafone-form,
+.visa-form,
+.cash-form {
+    margin: 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+
+.countainphone{
+    margin-bottom: 20px;
+}
+.visa-form input,
+.inputphone
+{
+    width: 100% !important;
+    height: 45px !important;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.visa-form input:focus,
+.vodafone-form .inputphone:focus,
+.inputphone:focus+.buttonphone{
+    border-color: #43fafa;
+    outline: none;
+    box-shadow: none;
+}   
+.visa-form button ,
+.cash-form button,
+.vodafone-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.visa-form button:hover,
+.cash-form button:hover,
+.vodafone-form button:hover {
+    background-color: #0056b3;
+}
+/* customStyles.css */

@@ -1,0 +1,77 @@
+.plus,
+.minus {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media (max-width: 540px) {
+
+    .cart-table .plus,
+    .cart-table .minus {
+        width: 20px;
+        height: 20px;
+        font-weight: normal;
+        font-size: 12px;
+    }
+
+    .cart-table {
+        font-size: 12px;
+    }
+
+    .cart-table input {
+        max-width: 30px;
+    }
+
+    .total-one-price {
+        display: none;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 5px !important;
+    }
+}
+.image-cart {
+    cursor: pointer;
+}
+.confirm-login{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.1);
+}
+.confirm-login .content{
+    width: 450px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+@media (max-width: 540px) {
+    .confirm-login .content {
+        width: 90%;
+        font-size: 14px;
+    }
+}
+.confirm-login h3{
+    text-align: end;
+}
+.confirm-login .content .redirect{
+    border-top: 2px solid #ccc;
+    padding-top: 10px;
+}
