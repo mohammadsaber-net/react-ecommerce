@@ -10,7 +10,7 @@ import { store } from './redux-tool/redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-    <BrowserRouter basename='/react-ecommerce'>
+    <BrowserRouter>
         <App message="dd"/>
     </BrowserRouter>
     </Provider>
