@@ -40,7 +40,7 @@ function Product(){
             <img
               className='img-fluid products-image'
               style={{ height: "200px" }}
-              src={`https://ecommerce-back-pys6.onrender.com/products/images/${product.image}`}
+              src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`}
               alt={product.title}
               />
               {console.log(product.image)}

@@ -25,7 +25,7 @@ function Details(){
             {products&&<div className="d-flex justify-content-center flex-column align-items-center flex-sm-row align-items-sm-start">
             <Link to={"/"} className="btn btn-outline-primary">back to products page</Link>
             <div  className="details-box">
-                <img src={`https://ecommerce-back-pys6.onrender.com/products/images/${products.image}`} alt={products.title} />
+                <img src={`https://ecommerce-back-pys6.onrender.com/images/${products.image}`} alt={products.title} />
             <div className="info">
                 <h3 className="text-primary">{products.title}</h3>
                 <p className="text-dark">{products.description}</p>
