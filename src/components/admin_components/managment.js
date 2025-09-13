@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { deleteProduct, resetDeleteProduct } from "../../redux-tool/slice-deleteProduct";
 import Form from "./form";
 import Spinner from "../spinner&slider/spinner";
-import { fetchOneProduct } from "../../redux-tool/slice-one-product";
+import { fetchOneProduct, resetAddOneProduct } from "../../redux-tool/slice-one-product";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ function Managment() {
   const login=useSelector(state=>state.adminLogin.userInfo)
   const [managment,setManagment]=useState(false)
   useEffect(()=>{
+    dispatch(resetAddOneProduct())
       const admin = localStorage.getItem('token');
       if (admin) {
         try {
@@ -68,6 +69,7 @@ function Managment() {
       toast.error("failed to delete product")
     }
   },[deleteProductState.product])
+
     return (
         <>
         {managment && <div className="container mt-80">
@@ -75,7 +77,7 @@ function Managment() {
             {showForm && <Form action={actionType} setShowForm={setShowForm} product={oneProduct?oneProduct:{}} />}
             <h2 className="mb-4">Product Management</h2>
             <Button variant="outline-success" className="mb-3" onClick={() => { setShowForm(true); setActionType("Add New Product"); }}>Add New Product</Button>
-            <table className="table table-striped">
+            <table className="table manage-table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Image</th>
@@ -91,7 +93,7 @@ function Managment() {
                             <td><img style={{ width: "50px", height: "50px" }} src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} alt={product.title} /></td>
                             <td>{product.title}</td>
                             <td>{product.category}</td>
-                            <td>{product.description}</td>
+                            <td ><div className="description">{product.description}</div></td>
                             <td>
                                 <button onClick={() => { setShowForm(true); setActionType("Update Product"); getOneProduct(product._id) }} className="btn btn-outline-primary d-block mb-2">Update</button>
                                 <button onClick={() => deletion(product._id)} className="btn btn-outline-danger">Delete</button>

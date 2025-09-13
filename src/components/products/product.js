@@ -20,7 +20,7 @@ function Product(){
         <>
           {products.length===0 && <Spinner />}
           <Hero />
-        <Container className='sub-container my-5'>
+       { <Container className='sub-container my-5'>
           {products.length>0&&<div className=' category-parent bg-primary'>
             <Link to={`/products/men's clothing`} className='category'>men's clothing</Link>
             <Link to={`/products/jewelery`} className='category'>jewelery</Link>
@@ -43,7 +43,6 @@ function Product(){
               src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`}
               alt={product.title}
               />
-              {console.log(product.image)}
       <Card.Body>
         <Link  to={`/product/${product._id}`}>
         <Card.Title className="title mb-1">{product.title}</Card.Title>
@@ -62,7 +61,7 @@ function Product(){
         }
         </div>
         </Container>
-        
+} 
         </>
     )
 }

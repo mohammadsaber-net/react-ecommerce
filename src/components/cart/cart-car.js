@@ -27,7 +27,7 @@ function Cart(){
                 </div>}
                {cart.length>0&&<div>
                 <div onClick={()=>dispatch(removeCart())} className="btn btn-danger">clear</div>
-                <Table className="cart-table" striped bordered hover size="sn">
+                <Table className="cart-table" bordered striped hover size="sn">
                     <thead>
                         <tr>
                             <th>image</th>
@@ -43,7 +43,7 @@ function Cart(){
                         {cart.map(product=>{
                             return(
                                 <tr key={product.id}>
-                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={product.image} alt={product.name}/></th>
+                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} alt={product.name}/></th>
                                     <td>{product.title.slice(0,100)}...</td>
                                     <td>{product.price} $</td>
                                     <td className="total-one-price">{(product.price * product.quantity).toFixed(1)} $</td>
@@ -54,7 +54,7 @@ function Cart(){
                                         {<span style={{visibility:product.quantity>=2?"visible":"hidden"}} onClick={()=>dispatch(increaseAndDcrease({product,state:"-"}))} className="minus bg-danger">-</span>}
                                         </div>
                                     </td>
-                                    <td onClick={()=>dispatch(deleteFromCart(product))} className="btn btn-danger">delete</td>
+                                    <td ><button onClick={()=>dispatch(deleteFromCart(product))} className="btn btn-danger">delete</button></td>
                                 </tr>
                             )
                         })}

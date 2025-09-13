@@ -87,3 +87,13 @@
     background-color: rgba(255, 0, 0, 0.933);
     color: white;
 }
+@media (max-width:820px) {
+    .manage-table{
+        overflow: auto;
+    }
+    .manage-table .description{
+        max-width: 150px;
+        height: 150px;
+        overflow: auto;
+    }
+}
