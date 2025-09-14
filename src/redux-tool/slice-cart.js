@@ -1,21 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const cartSlice=createSlice({
-    initialState:[],
+    initialState:null,
     name:"cartSlice",
     reducers:{
         addToCart:(state,action)=>{
-            let findProduct=state.find(product=>product.id===action.payload.id)
-            if(findProduct){
-                findProduct.quantity +=1
-            }else{
-                let product={...action.payload,quantity:1}
-                state.push(product)
-            }       
+            return state=action.payload     
         },
         changeAmount:(state,action)=>{
             let amount=action.payload.quantity
-            let findProduct=state.find(product=>product.id===action.payload.product.id)
+            let findProduct=state.find(product=>product._id===action.payload.product._id)
             if(amount<1){
                 findProduct.quantity = 1
             }else{
@@ -23,20 +17,31 @@ export const cartSlice=createSlice({
             }
         },
         deleteFromCart:(state,action)=>{
-            return state.filter(product=>product.id !== action.payload.id)
+            let products=JSON.parse(localStorage.getItem("order"))
+            products= products.filter(product=>product.product._id !== action.payload.product._id)
+            if(products.length>0){
+                localStorage.setItem("order",JSON.stringify(products))
+            }else{
+                localStorage.removeItem("order")
+            }
+            return state=products
         },
         removeCart:(state,action)=>{
+            localStorage.removeItem("order")
             return state=[]
         },
         increaseAndDcrease:(state,action)=>{
-            let findProduct=state.find(product=>product.id===action.payload.product.id)
-            
-            if(action.payload.state==="+"){
+            let products=JSON.parse(localStorage.getItem("order"))
+            let findProduct=products.find(product=>product.product._id===action.payload.product.product._id)
+            const index=products.indexOf(findProduct)
+            if(action.payload.value==="+"){
                 findProduct.quantity +=1
             }else{
                 findProduct.quantity -=1
             }
-            
+            products[index]=findProduct
+            localStorage.setItem("order",JSON.stringify(products))
+            return state=JSON.parse(localStorage.getItem("order"))
         }
     }
 })

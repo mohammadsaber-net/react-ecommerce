@@ -14,8 +14,24 @@ function Product(){
     const products=useSelector(state=>state.products)
     useEffect(()=>{
         dispatch(fetchProduct())
+        if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     },[])
-    
+    const addToStorage=(data)=>{
+      if(localStorage.getItem("order")){
+        const order=JSON.parse(localStorage.getItem("order"))
+        const findProduct=order.find((product)=>product.product._id===data._id)
+        if(findProduct){
+          findProduct.quantity += 1
+        }else{
+          order.push({quantity:1,product:data})
+        }
+        localStorage.setItem("order",JSON.stringify(order))
+        
+     }else{
+      localStorage.setItem("order",JSON.stringify([{quantity:1,product:data}]))
+     }
+     dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
+    }
     return (
         <>
           {products.length===0 && <Spinner />}
@@ -49,7 +65,7 @@ function Product(){
         </Link>
         <p className='text-dark mt-0 mb-0 fs-5'>price: {product.price} EGP</p>
         <div className='options' style={{display:"flex",justifyContent:"space-between"}} >
-        <Button  variant="outline-primary" onClick={()=>dispatch(addToCart(product))}>cart</Button>
+        <Button  variant="outline-primary" onClick={()=>addToStorage(product)}>cart</Button>
         <Link className="btn btn-outline-info" to={`/product/${product._id}`} >details</Link>
         </div>
       </Card.Body>

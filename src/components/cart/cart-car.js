@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import {  changeAmount, deleteFromCart, increaseAndDcrease, removeCart } from "../../redux-tool/slice-cart"
+import {  addToCart, changeAmount, deleteFromCart, increaseAndDcrease, removeCart } from "../../redux-tool/slice-cart"
 import { Link} from "react-router-dom"
 import image from "./../image/shop-now-message-neon-light-260nw-1826396891.webp"
 import "./cart.css"
@@ -8,15 +8,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons/faCartArrowDown"
 import Confirm from "./confirm-cart"
 import { setConfirm } from "../../redux-tool/showLoginCart"
+import { useEffect, useState } from "react"
 
 
 function Cart(){
-    let cart=useSelector(state=>state.cart)
+    let cart=useSelector(state=>state.cart||[])
     let showConfirm=useSelector(state=>state.showLogin)
     let dispatch=useDispatch()
-    let total=0
-    cart.map(product=>total += product.price * product.quantity)
-    
+    let [total,setTotal]=useState(0)
+    useEffect(()=>{
+        dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
+    },[dispatch])
+    useEffect(() => {
+    const totalPrice = cart.reduce((acc, product) => {
+        return acc + product.product.price * product.quantity
+    }, 0)
+    setTotal(totalPrice.toFixed(2))
+}, [cart])
         return(
             <div className="container mt-57">
                 {showConfirm&&<Confirm />}
@@ -42,16 +50,17 @@ function Cart(){
                     <tbody>
                         {cart.map(product=>{
                             return(
-                                <tr key={product.id}>
-                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} alt={product.name}/></th>
-                                    <td>{product.title.slice(0,100)}...</td>
-                                    <td>{product.price} $</td>
-                                    <td className="total-one-price">{(product.price * product.quantity).toFixed(1)} $</td>
+                                <tr key={product.product._id}>
+                                    
+                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={`https://ecommerce-back-pys6.onrender.com/images/${product.product.image}`} alt={product.name}/></th>
+                                    <td>{product.product.title}</td>
+                                    <td>{product.product.price} $</td>
+                                    <td className="total-one-price">{(product.product.price * product.quantity).toFixed(1)} $</td>
                                     {/* <td>{product.quantity}</td> */}
                                     <td><div className="d-flex gap-2 align-items-center">
-                                        <span onClick={()=>dispatch(increaseAndDcrease({product,state:"+"}))} className="plus bg-success">+</span>
-                                        <input value={product.quantity} style={{maxWidth:"50px"}} onChange={(eve)=>dispatch(changeAmount({product,quantity:eve.target.value}))} />
-                                        {<span style={{visibility:product.quantity>=2?"visible":"hidden"}} onClick={()=>dispatch(increaseAndDcrease({product,state:"-"}))} className="minus bg-danger">-</span>}
+                                        <span onClick={()=>dispatch(increaseAndDcrease({product,value:"+"}))} className="plus bg-success">+</span>
+                                        <input value={product.quantity} style={{maxWidth:"50px"}} onChange={(eve)=>dispatch(changeAmount({product:product.product,quantity:eve.target.value}))} />
+                                        {<span style={{visibility:product.quantity>=2?"visible":"hidden"}} onClick={()=>dispatch(increaseAndDcrease({product,value:"-"}))} className="minus bg-danger">-</span>}
                                         </div>
                                     </td>
                                     <td ><button onClick={()=>dispatch(deleteFromCart(product))} className="btn btn-danger">delete</button></td>
@@ -61,7 +70,7 @@ function Cart(){
                     </tbody>
                 </Table>
                 <div className="d-flex justify-content-between">
-                <h5>total is: {total.toFixed(1)}</h5>
+                <h5>total is: {total}</h5>
                 <button onClick={()=>dispatch(setConfirm(true))} className="btn btn-outline-success">Order Now !</button>
                 </div>
                 </div>}

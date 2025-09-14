@@ -14,11 +14,14 @@ function Navbarr(){
   let login=useSelector(state=>state.adminLogin.userInfo)
   let register=useSelector(state=>state.addUser.data)
   let number=useSelector(state=>state.cart)
+  const [cart,setCart]=useState(0)
   let dispatch=useDispatch()
   const navigate=useNavigate()
   const [managment,setManagment]=useState(false)
   const [logOut,setLogOut]=useState(false)
   useEffect(()=>{
+    
+    setCart(number?.length||0)
     const admin = localStorage.getItem('token');
     if (admin) {
       try {
@@ -45,7 +48,7 @@ function Navbarr(){
       setManagment(false);
     }
     dispatch(setIsAdmin(managment))
-  }, [login,register]);
+  }, [login,register,number]);
   const changeLoginState=()=>{
     setLogOut(false)
     setManagment(false)
@@ -59,7 +62,7 @@ function Navbarr(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
             {managment && <Link to={"/managment"} className='nav-link text-white'>Managment</Link>}
-            <Link to={"/cart"} className={number.length>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{number.length}</span></Link>
+            <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
             {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={()=>changeLoginState()} className='nav-link text-white'>logOut</Link>}
           </Nav>
         </Navbar.Collapse>
