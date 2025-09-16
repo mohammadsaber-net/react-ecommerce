@@ -73,7 +73,7 @@
     border-color: #378fee;
     box-shadow: none !important;
 }
-.form-container .close-button{
+.close-button{
     background-color: white;
     color: rgba(255, 0, 0, 0.733);
     padding: 0 10px;
@@ -83,7 +83,7 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.form-container .close-button:hover{
+.close-button:hover{
     background-color: rgba(255, 0, 0, 0.933);
     color: white;
 }

@@ -15,7 +15,6 @@ function Navbarr(){
   let register=useSelector(state=>state.addUser.data)
   let number=useSelector(state=>state.cart)
   const [cart,setCart]=useState(0)
-  const navigate=useNavigate()
   let dispatch=useDispatch()
   const [managment,setManagment]=useState(false)
   const [logOut,setLogOut]=useState(false)

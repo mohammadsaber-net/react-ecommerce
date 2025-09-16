@@ -1,27 +1,23 @@
 import { Table } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import {  addToCart, changeAmount, deleteFromCart, increaseAndDcrease, removeCart } from "../../redux-tool/slice-cart"
-import { Link} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import image from "./../image/shop-now-message-neon-light-260nw-1826396891.webp"
 import "./cart.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons/faCartArrowDown"
-import Confirm from "./confirm-cart"
-import { setConfirm } from "../../redux-tool/showLoginCart"
 import { useEffect, useState } from "react"
-
-
+import { jwtDecode } from "jwt-decode"
+import { toast } from "react-toastify"
+import { passing } from "../../redux-tool/slice-guard"
 function Cart(){
-    let cart=useSelector(state=>state.cart)
-   
-    let showConfirm=useSelector(state=>state.showLogin)
-    let dispatch=useDispatch()
-    let [total,setTotal]=useState(0)
+    const cart=useSelector(state=>state.cart)
+    const dispatch=useDispatch()
+    const [total,setTotal]=useState(0)
     useEffect(()=>{
         const orderFromLocal = JSON.parse(localStorage.getItem("order"));
         if (orderFromLocal && Array.isArray(orderFromLocal) && orderFromLocal.length > 0) {
         dispatch(addToCart(orderFromLocal));
-        console.log(cart)
     }
 },[])
     useEffect(() => {
@@ -30,9 +26,27 @@ function Cart(){
     }, 0)
     setTotal(totalPrice.toFixed(2))
 }, [cart])
+const navigate=useNavigate()       
+const redirctToBay=()=>{
+    const token = localStorage.getItem('token');
+     if (token) {
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.exp * 1000 < Date.now()) {
+            toast.error("please login again")
+            navigate("/login")
+            return;
+        }
+        toast.info("choose your payment method")
+        dispatch(passing(true))
+        navigate("/card")
+        
+        }else{
+            toast.info("to continue please log in first")
+            navigate("/login")
+        }
+    }
         return(
             <div className="container mt-57">
-                {showConfirm&&<Confirm />}
                 <h3>your cart have <span className="text-primary">{cart.length}</span> items</h3>
                 {cart.length===0&&<div className="text-center">
                     
@@ -75,7 +89,7 @@ function Cart(){
                 </Table>
                 <div className="d-flex justify-content-between">
                 <h5>total is: {total}</h5>
-                <button onClick={()=>dispatch(setConfirm(true))} className="btn btn-outline-success">Order Now !</button>
+                <button onClick={()=>redirctToBay()} className="btn btn-outline-success">Order Now !</button>
                 </div>
                 </div>}
             </div>

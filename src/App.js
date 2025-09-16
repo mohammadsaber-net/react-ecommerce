@@ -8,7 +8,6 @@ import Details from './components/products/Details';
 import Login from './components/authent/login';
 import Card from "./components/authent/card"
 import Category from './components/products/category';
-import Confirm from './components/cart/confirm-cart';
 import Footer from './components/footer';
 import Managment from './components/admin_components/managment';
 import { ToastContainer } from 'react-toastify';
@@ -19,7 +18,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Product />} />
         <Route path='/card' element={<Card />} />
-        <Route path='/confirm' element={<Confirm />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
         <Route path='/managment' element={<Managment />}/>
