@@ -1,4 +1,4 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
+
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const createUser=createAsyncThunk("createUserSlice/createUser",async(data,{ rejectWithValue })=>{
     console.log(data)

@@ -14,6 +14,7 @@ function Product(){
     const products=useSelector(state=>state.products)
     useEffect(()=>{
         dispatch(fetchProduct())
+        console.log(products)
         if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     },[])
     const addToStorage=(data)=>{
@@ -34,7 +35,7 @@ function Product(){
     }
     return (
         <>
-          {products.length===0 && <Spinner />}
+          {products.length===0 && <Spinner />}  
           <Hero />
        { <Container className='sub-container my-5'>
           {products.length>0&&<div className=' category-parent bg-primary'>
@@ -43,7 +44,7 @@ function Product(){
             <Link to={`/products/electronics`} className='category'>electronics</Link>
             <Link to={`/products/women's clothing`} className='category'>women's clothing</Link>
           </div>}
-          
+          <Link to={"/cart"}>cart</Link>
           <div id='shopping' className='row'>
         {
           products.map(product=>{

@@ -15,12 +15,11 @@ function Navbarr(){
   let register=useSelector(state=>state.addUser.data)
   let number=useSelector(state=>state.cart)
   const [cart,setCart]=useState(0)
-  let dispatch=useDispatch()
   const navigate=useNavigate()
+  let dispatch=useDispatch()
   const [managment,setManagment]=useState(false)
   const [logOut,setLogOut]=useState(false)
   useEffect(()=>{
-    
     setCart(number?.length||0)
     const admin = localStorage.getItem('token');
     if (admin) {
@@ -34,12 +33,11 @@ function Navbarr(){
             return;
           }
         if (decodedToken.role === 'ADMIN') {
-          navigate("/")
           setManagment(true);
         }else{
           setManagment(false);
+          
         }
-        navigate("/")
         setLogOut(true);
       } catch (error) {
         console.error("Failed to decode token:", error);
@@ -61,8 +59,8 @@ function Navbarr(){
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
-            {managment && <Link to={"/managment"} className='nav-link text-white'>Managment</Link>}
             <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
+            {managment && <Link to={"/managment"} className='nav-link text-white'>Managment</Link>}
             {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={()=>changeLoginState()} className='nav-link text-white'>logOut</Link>}
           </Nav>
         </Navbar.Collapse>

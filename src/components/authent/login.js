@@ -9,7 +9,9 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Register from "./register";
 import { adminLogin } from "../../redux-tool/adminLogin";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 function Login(){
+  const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -26,9 +28,10 @@ function Login(){
   const admin=useSelector(state=>state.adminLogin)
   useEffect(()=>{
     if(admin.userInfo){
-      if(admin.userInfo.status==="FAIL"){
+      if(admin.userInfo.status==="FAIL"||admin.userInfo.status==="ERROR"){
       toast.error(admin.userInfo.message)
     }else if(admin.userInfo.status==="SUCCESS"){
+      navigate("/")
       toast.success("login successful")
     }
   }

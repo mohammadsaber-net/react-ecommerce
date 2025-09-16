@@ -1,9 +1,8 @@
 import { useDispatch } from "react-redux"
-import { loginState } from '../../redux-tool/slice-login';
+// import { loginState } from '../../redux-tool/slice-login';
 import { Link, useNavigate } from "react-router-dom"
 import { setConfirm } from "../../redux-tool/showLoginCart"
 import { useState } from "react"
-import { passing } from "../../redux-tool/slice-guard"
 
 function Confirm(props){
     let navigate=useNavigate()
@@ -18,7 +17,7 @@ function Confirm(props){
         if(localStorage.getItem("userInfo")){
             let email=JSON.parse(localStorage.getItem("userInfo")).email
             if(email===getEmail){
-                dispatch(passing(true))
+                
                 navigate("/card")
             }else{
                 setRemember(true)
@@ -41,8 +40,8 @@ function Confirm(props){
             <form onSubmit={handleSubmit} className="text-center mt-3" >
                 <label className="">add your email</label>
                 <input onChange={(event)=>setGetEmail(event.target.value)} className="form-control mt-1 m-auto w-75 mb-2"/>
-                {remember&&<small onClick={()=>dispatch(loginState(true))} className="text-danger">this is not the email, you can <Link to={"/login"} className="text-primary">sign up</Link></small>}
-                {notHaveEmail&&<small onClick={()=>dispatch(loginState(true))} className="text-danger">you don't have email, you can <Link to={"/login"} className="text-primary">sign up</Link></small>}
+                {remember&&<small className="text-danger">this is not the email, you can <Link to={"/login"} className="text-primary">sign up</Link></small>}
+                {notHaveEmail&&<small className="text-danger">you don't have email, you can <Link to={"/login"} className="text-primary">sign up</Link></small>}
                 <button  onClick={()=>activeEmail()} className="btn w-50 m-auto text-center btn-primary">continue</button>
             </form>
                 <small>by continue you're accept our <span className="text-primary">terms and policy</span> </small>

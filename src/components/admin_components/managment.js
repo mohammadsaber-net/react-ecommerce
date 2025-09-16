@@ -19,8 +19,8 @@ function Managment() {
   const deleteProductState=useSelector(state=>state.deleteProduct);
   const login=useSelector(state=>state.adminLogin.userInfo)
   const [managment,setManagment]=useState(false)
+  const [loadingProductId, setLoadingProductId] = useState(null);
   useEffect(()=>{
-    dispatch(resetAddOneProduct())
       const admin = localStorage.getItem('token');
       if (admin) {
         try {
@@ -53,16 +53,19 @@ function Managment() {
   };
 
   const getOneProduct = (id) => {
-    dispatch(fetchOneProduct(id));
+    setLoadingProductId(id);
+  dispatch(fetchOneProduct(id)).then(() => {
+    setLoadingProductId(null);
+  });
   };
     useEffect(() =>{ 
-    if(managment) {
       dispatch(fetchProduct())
-    };
   }, [dispatch,deletion,showForm]);
+  // 
   useEffect(()=>{
     if(deleteProductState.product==="DELETED"){
       dispatch(resetDeleteProduct())
+      
       toast.success("product deleted")
     }else if(deleteProductState.product==="NOT DELETED"){
       dispatch(resetDeleteProduct())
@@ -74,9 +77,9 @@ function Managment() {
         <>
         {managment && <div className="container mt-80">
             {allProducts.length===0 && <Spinner />}
-            {showForm && <Form action={actionType} setShowForm={setShowForm} product={oneProduct?oneProduct:{}} />}
+            {showForm && (actionType === "Add New Product" || oneProduct.loading)&& <Form action={actionType} setShowForm={setShowForm} product={oneProduct?oneProduct:{}} />}
             <h2 className="mb-4">Product Management</h2>
-            <Button variant="outline-success" className="mb-3" onClick={() => { setShowForm(true); setActionType("Add New Product"); }}>Add New Product</Button>
+            <Button variant="outline-success" className="mb-3" onClick={() => {  dispatch(resetAddOneProduct()); setActionType("Add New Product");setShowForm(true)}}>Add New Product</Button>
             <table className="table manage-table table-striped">
                 <thead>
                     <tr>
@@ -95,7 +98,7 @@ function Managment() {
                             <td>{product.category}</td>
                             <td ><div className="description">{product.description}</div></td>
                             <td>
-                                <button onClick={() => { setShowForm(true); setActionType("Update Product"); getOneProduct(product._id) }} className="btn btn-outline-primary d-block mb-2">Update</button>
+                                <button onClick={() => { setShowForm(true);setActionType("Update Product"); getOneProduct(product._id) }} className="btn btn-primary d-block mb-2">{loadingProductId===product._id?<div className="d-flex align-items-center"><span className="Submit-loading"></span></div>:"Update"}</button>
                                 <button onClick={() => deletion(product._id)} className="btn btn-outline-danger">Delete</button>
                             </td>
                         </tr>

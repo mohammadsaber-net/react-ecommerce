@@ -3,7 +3,7 @@ import { productSlice } from "./slice-product";
 import { cartSlice } from "./slice-cart";
 import { oneProductSlice } from "./slice-one-product";
 import { gaurdCard } from "./slice-guard";
-import { sliceLogin } from "./slice-login";
+// import { sliceLogin } from "./slice-login";
 import { sliceCategory } from "./slice-category";
 import { sliceConfirmLogin } from "./showLoginCart";
 import { addProductSlice } from "./slice-addProduct";
@@ -18,7 +18,6 @@ export const store =configureStore({
         cart:cartSlice.reducer,
         oneProduct:oneProductSlice.reducer,
         pass:gaurdCard.reducer,
-        login:sliceLogin.reducer,
         cateProducts:sliceCategory.reducer,
         showLogin:sliceConfirmLogin.reducer,
         addproduct:addProductSlice.reducer,

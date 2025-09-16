@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
 export const isAdminSlice=createSlice({
     name:"isAdmin",
     initialState:false,

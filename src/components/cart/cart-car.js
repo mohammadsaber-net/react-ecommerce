@@ -12,13 +12,18 @@ import { useEffect, useState } from "react"
 
 
 function Cart(){
-    let cart=useSelector(state=>state.cart||[])
+    let cart=useSelector(state=>state.cart)
+   
     let showConfirm=useSelector(state=>state.showLogin)
     let dispatch=useDispatch()
     let [total,setTotal]=useState(0)
     useEffect(()=>{
-        dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
-    },[dispatch])
+        const orderFromLocal = JSON.parse(localStorage.getItem("order"));
+        if (orderFromLocal && Array.isArray(orderFromLocal) && orderFromLocal.length > 0) {
+        dispatch(addToCart(orderFromLocal));
+        console.log(cart)
+    }
+},[])
     useEffect(() => {
     const totalPrice = cart.reduce((acc, product) => {
         return acc + product.product.price * product.quantity
@@ -30,6 +35,7 @@ function Cart(){
                 {showConfirm&&<Confirm />}
                 <h3>your cart have <span className="text-primary">{cart.length}</span> items</h3>
                 {cart.length===0&&<div className="text-center">
+                    
                     <p className="text-primary fs-4">click image to start shopping <FontAwesomeIcon icon={faCartArrowDown}/></p>
                     <Link to={"/"}><img className="image-cart" src={image} alt="buy now image" /></Link>
                 </div>}
@@ -42,7 +48,6 @@ function Cart(){
                             <th>title</th>
                             <th>price</th>
                             <th className="total-one-price">total price</th>
-                            {/* <th>amount</th> */}
                             <th>change</th>
                             <th>action</th>
                         </tr>
@@ -56,7 +61,6 @@ function Cart(){
                                     <td>{product.product.title}</td>
                                     <td>{product.product.price} $</td>
                                     <td className="total-one-price">{(product.product.price * product.quantity).toFixed(1)} $</td>
-                                    {/* <td>{product.quantity}</td> */}
                                     <td><div className="d-flex gap-2 align-items-center">
                                         <span onClick={()=>dispatch(increaseAndDcrease({product,value:"+"}))} className="plus bg-success">+</span>
                                         <input value={product.quantity} style={{maxWidth:"50px"}} onChange={(eve)=>dispatch(changeAmount({product:product.product,quantity:eve.target.value}))} />

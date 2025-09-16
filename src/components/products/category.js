@@ -36,7 +36,7 @@ function Category(){
         </Link>
         <div className='options' style={{display:"flex",justifyContent:"space-between"}} >
         <Button  variant="primary" onClick={()=>dispatch(addToCart(product))}>cart</Button>
-        <Link className="btn btn-primary" to={`/product/${product.id}`} >details</Link>
+        <Link className="btn btn-primary" to={`/product/${product._id}`} >details</Link>
         </div>
       </Card.Body>
     </Card>
