@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const gaurdCard=createSlice({
-    initialState:false,
+    initialState:null,
     name:"gaurdCard",
     reducers:{
         passing:(state,action)=>{
             return state=action.payload
+        },
+        resetGaurd:(state)=>{
+            return state=null
         }
     }
 })
-export const {passing}=gaurdCard.actions
+export const {passing,resetGaurd}=gaurdCard.actions

@@ -9,11 +9,13 @@ import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons/faCartArrowDo
 import { useEffect, useState } from "react"
 import { jwtDecode } from "jwt-decode"
 import { toast } from "react-toastify"
-import { passing } from "../../redux-tool/slice-guard"
+import Confirmation from "./confirmation"
+import { totalOrder } from "../../redux-tool/slice-totalPrice"
 function Cart(){
     const cart=useSelector(state=>state.cart)
     const dispatch=useDispatch()
     const [total,setTotal]=useState(0)
+    const [confirmation,setConfiramtion]=useState(false)
     useEffect(()=>{
         const orderFromLocal = JSON.parse(localStorage.getItem("order"));
         if (orderFromLocal && Array.isArray(orderFromLocal) && orderFromLocal.length > 0) {
@@ -21,10 +23,11 @@ function Cart(){
     }
 },[])
     useEffect(() => {
-    const totalPrice = cart.reduce((acc, product) => {
+    const totalMoney = cart.reduce((acc, product) => {
         return acc + product.product.price * product.quantity
     }, 0)
-    setTotal(totalPrice.toFixed(2))
+    setTotal(totalMoney.toFixed(2))
+    dispatch(totalOrder(totalMoney))
 }, [cart])
 const navigate=useNavigate()       
 const redirctToBay=()=>{
@@ -36,17 +39,15 @@ const redirctToBay=()=>{
             navigate("/login")
             return;
         }
-        toast.info("choose your payment method")
-        dispatch(passing(true))
-        navigate("/card")
-        
+        setConfiramtion(true)
         }else{
             toast.info("to continue please log in first")
             navigate("/login")
         }
     }
         return(
-            <div className="container mt-57">
+            <div className="container mt-80">
+                {confirmation&&<Confirmation total={total} setConfiramtion={setConfiramtion}/>}
                 <h3>your cart have <span className="text-primary">{cart.length}</span> items</h3>
                 {cart.length===0&&<div className="text-center">
                     

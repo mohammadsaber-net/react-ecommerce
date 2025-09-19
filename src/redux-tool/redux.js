@@ -3,7 +3,6 @@ import { productSlice } from "./slice-product";
 import { cartSlice } from "./slice-cart";
 import { oneProductSlice } from "./slice-one-product";
 import { gaurdCard } from "./slice-guard";
-// import { sliceLogin } from "./slice-login";
 import { sliceCategory } from "./slice-category";
 import { sliceConfirmLogin } from "./showLoginCart";
 import { addProductSlice } from "./slice-addProduct";
@@ -12,6 +11,9 @@ import { sliceDeleteProduct } from "./slice-deleteProduct";
 import { updatedProductSlice } from "./slice-updateProduct";
 import { isAdminSlice } from "./isAdmin";
 import {  createUserSlice } from "./slice-register";
+import { paymentSlice } from "./paymentSlice";
+import { totalPrice } from "./slice-totalPrice";
+import { sendingOrderSlice } from "./confirmOrder";
 export const store =configureStore({
     reducer:{
         products:productSlice.reducer,
@@ -25,6 +27,9 @@ export const store =configureStore({
         deleteProduct:sliceDeleteProduct.reducer,
         updateProduct:updatedProductSlice.reducer,
         isAdmin:isAdminSlice.reducer,
-        addUser:createUserSlice.reducer
+        addUser:createUserSlice.reducer,
+        payment:paymentSlice.reducer,
+        totalPrice:totalPrice.reducer,
+        sendingOrder:sendingOrderSlice.reducer
     }
 })

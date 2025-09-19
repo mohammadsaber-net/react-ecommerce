@@ -44,7 +44,6 @@ function Product(){
             <Link to={`/products/electronics`} className='category'>electronics</Link>
             <Link to={`/products/women's clothing`} className='category'>women's clothing</Link>
           </div>}
-          <Link to={"/cart"}>cart</Link>
           <div id='shopping' className='row'>
         {
           products.map(product=>{

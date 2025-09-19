@@ -2,17 +2,21 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { visaSchema } from "../validations-constant"
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeCart } from "../../redux-tool/slice-cart";
 
 
 function Visa(){
   let navigate=useNavigate()
   let dispatch=useDispatch()
+  const passing=useSelector(state=>state.pass)
+  useEffect(()=>{
+    if(passing!=="visa") navigate("/")
+  })
   const[seeCvv,setSeeCvv]=useState(false)
   const[seeNum,setSeeNum]=useState(false)
   const [value,setValue]=useState('')
@@ -31,8 +35,8 @@ function Visa(){
        mode:"all"
     })
     let timerInterval;
-    const visaConfirmed=()=>{
-    Swal.fire({
+  const visaConfirmed=()=>{
+  Swal.fire({
   title: "confirming!",
   html: "wait a <b></b> till comfirmation your order.",
   timer: 2000,
