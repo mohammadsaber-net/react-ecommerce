@@ -10,9 +10,9 @@ import Category from './components/products/category';
 import Footer from './components/footer';
 import Managment from './components/admin_components/managment';
 import { ToastContainer } from 'react-toastify';
-import PaymentForm from './components/authent/payment';
 import Cash from './components/authent/cash';
-import Visa from './components/authent/visa';
+import Visa from "./components/authent/visa"
+import Users from './components/admin_components/users';
 function App() {
   return (
     <div className='App'>
@@ -23,10 +23,10 @@ function App() {
         <Route path='/payment/cash' element={<Cash />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/users' element={<Users />}/>
         <Route path='/managment' element={<Managment />}/>
         <Route path='/product/:Id' element={<Details />} />
         <Route path='/products/:cate' element={<Category />} />
-        <Route path='/payment' element ={<PaymentForm />}/>
       </Routes>
       <Footer />
       <ToastContainer />

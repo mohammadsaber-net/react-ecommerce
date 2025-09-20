@@ -25,9 +25,11 @@ function Confirmation(props){
         const timer=setTimeout(()=>{
             if(formRef.current){
                 formRef.current.classList.add("show")
-            }
-        },50)
-        return ()=>clearTimeout(timer)
+              }
+            },50)
+            return ()=>{
+              clearTimeout(timer)
+        }
     },[])
     return(
         <>

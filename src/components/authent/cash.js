@@ -1,13 +1,9 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import MapAddressPicker from './mapAddress';
-import { useEffect,useRef,useState } from 'react';
+import { useEffect,useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { resetSendingOrder } from '../../redux-tool/confirmOrder';
-
-
-
 function Cash({}) {
   const total =useSelector(state=>state.totalPrice)
   const cash=useSelector(state=>state.sendingOrder)
@@ -30,11 +26,12 @@ function Cash({}) {
     dispatch(resetSendingOrder())
     setConfrimed(false)
   }
+    
   return (
     <div className="container mt-80">
       <h3>confirm order</h3>
-      <p>total price: {total} EGP</p>
-      <MapAddressPicker  />
+      <h3>total price : {total}</h3>
+      <MapAddressPicker />
       <div>
         {confirmed&&<div className="form-container">
           <div className='form'>

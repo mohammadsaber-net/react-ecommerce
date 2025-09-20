@@ -12,10 +12,8 @@ export const createUser=createAsyncThunk("createUserSlice/createUser",async(data
         return rejectWithValue(errorData)
     }
         const responseData=await respone.json()
-        
         return responseData
     } catch (error) {
-        console.log(error.message)
         return rejectWithValue(error.message)
     }
 })

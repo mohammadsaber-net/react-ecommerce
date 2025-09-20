@@ -89,6 +89,9 @@
     background-color: rgba(255, 0, 0, 0.933);
     color: white;
 }
+.manage-table{
+    border: 2px solid #cac8c8;
+}
 @media (max-width:820px) {
     .manage-table{
         overflow: auto;

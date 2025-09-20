@@ -60,6 +60,7 @@ function Navbarr(){
           <Nav className="ms-auto ">
             <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
             {managment && <Link to={"/managment"} className='nav-link text-white'>Managment</Link>}
+            {managment && <Link to={"/users"} className='nav-link text-white'>Users</Link>}
             {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={()=>changeLoginState()} className='nav-link text-white'>logOut</Link>}
           </Nav>
         </Navbar.Collapse>

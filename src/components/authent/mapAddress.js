@@ -13,7 +13,7 @@ function LocationMarker({ setPosition }) {
   });
   return null;
 }
-function MapAddressPicker() {
+function MapAddressPicker(props) {
   const [position, setPosition] = useState(null);
   const [fetchedAddress, setFetchedAddress] = useState(null);
   useEffect(() => {
@@ -43,11 +43,13 @@ function MapAddressPicker() {
     };
     const userInfo=JSON.parse(localStorage.getItem("userInfo"))
     const items=localStorage.getItem("order")
+    let typeOfPayment="cash"
+    if(props.visa==="visa")typeOfPayment="visa"
     const orderInfo={
       name:userInfo.name,
       email:userInfo.email,
       phone:userInfo.phone,
-      typeOfPayment:"cash",
+      typeOfPayment:typeOfPayment,
       items:items,
       address:locationData
     }
@@ -81,7 +83,7 @@ function MapAddressPicker() {
         onClick={handleConfirm}
         disabled={!position}
       >
-      {cash.loading?<div className="d-flex align-items-center gap-2">Loading...<span className="Submit-loading"></span></div>:"confirm"}
+      {cash.loading || props.loading?<div className="d-flex align-items-center gap-2">Loading...<span className="Submit-loading"></span></div>:"confirm"}
       </button>
     </div>
   );

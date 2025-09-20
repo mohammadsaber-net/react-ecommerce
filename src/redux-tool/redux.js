@@ -14,6 +14,7 @@ import {  createUserSlice } from "./slice-register";
 import { paymentSlice } from "./paymentSlice";
 import { totalPrice } from "./slice-totalPrice";
 import { sendingOrderSlice } from "./confirmOrder";
+import { getUsersOrdersSlice } from "./slice-usersOrders";
 export const store =configureStore({
     reducer:{
         products:productSlice.reducer,
@@ -30,6 +31,7 @@ export const store =configureStore({
         addUser:createUserSlice.reducer,
         payment:paymentSlice.reducer,
         totalPrice:totalPrice.reducer,
-        sendingOrder:sendingOrderSlice.reducer
+        sendingOrder:sendingOrderSlice.reducer,
+        getUsers:getUsersOrdersSlice.reducer
     }
 })
