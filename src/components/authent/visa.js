@@ -16,7 +16,7 @@ function Visa(){
   const passing=useSelector(state=>state.pass)
   useEffect(()=>{
     if(passing!=="visa") navigate("/")
-  })
+  },[])
   const[seeCvv,setSeeCvv]=useState(false)
   const[seeNum,setSeeNum]=useState(false)
   const [value,setValue]=useState('')

@@ -51,6 +51,7 @@ function MapAddressPicker() {
       items:items,
       address:locationData
     }
+    // console.log(orderInfo)
     dispatch(sendingOrder(orderInfo))
   };
 

@@ -1,7 +1,7 @@
 // src/components/PaymentForm.js
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initiatePayment, resetPaymentState } from "../../redux-tool/paymentSlice";
+import { initiatePayment} from "../../redux-tool/paymentSlice";
 
 const PaymentForm = () => {
   const [amount, setAmount] = useState("");
