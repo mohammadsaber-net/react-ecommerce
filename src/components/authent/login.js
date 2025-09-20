@@ -55,7 +55,6 @@ function Login(){
                     {errors.password&&<small className="d-block text-danger">{errors.password.message}</small>}
             </div>
             <button disabled={!isValid}  type="submit" className="btn btn-success">{admin.loading?<div className="d-flex align-items-center gap-2">Loading...<span className="Submit-loading"></span></div>:"Submit"}</button>
-            {admin.userInfo?.status==="SUCCESS"&&<div className="text-danger mt-2 w-100">login successful</div>}
             <div className="mt-3">Don't have an account? <span style={{cursor:"pointer"}} className="text-primary" onClick={()=>setLogin(false)}>Register</span></div>
         </form>
         </Container>}

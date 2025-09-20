@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendingOrder } from "../../redux-tool/confirmOrder";
 
 function LocationMarker({ setPosition }) {
@@ -34,7 +34,7 @@ function MapAddressPicker() {
       fetchAddress();
     }
   }, [position]);
-
+  const cash=useSelector(state=>state.sendingOrder)
   const dispatch=useDispatch()
   const handleConfirm = () => {
     const locationData = {
@@ -51,7 +51,6 @@ function MapAddressPicker() {
       items:items,
       address:locationData
     }
-    // console.log(orderInfo)
     dispatch(sendingOrder(orderInfo))
   };
 
@@ -82,7 +81,7 @@ function MapAddressPicker() {
         onClick={handleConfirm}
         disabled={!position}
       >
-        confirm location
+      {cash.loading?<div className="d-flex align-items-center gap-2">Loading...<span className="Submit-loading"></span></div>:"confirm"}
       </button>
     </div>
   );

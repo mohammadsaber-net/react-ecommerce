@@ -14,7 +14,6 @@ function Product(){
     const products=useSelector(state=>state.products)
     useEffect(()=>{
         dispatch(fetchProduct())
-        console.log(products)
         if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     },[])
     const addToStorage=(data)=>{

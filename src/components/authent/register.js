@@ -102,7 +102,9 @@ function Register(){
                 </div>
             </div>
                     {errors.password&&<small className="d-block mb-2 text-danger">{errors.password.message}</small>}
-            <button disabled={!isValid} type="submit" className="btn btn-outline-success">submit</button>
+            <button disabled={!isValid} type="submit" className="btn btn-outline-success">
+                {registerState.loading?<div className="d-flex align-items-center gap-2">Loading...<span className="Submit-loading"></span></div>:"submit"}
+            </button>
             <div className="mt-3">Already have an account? <span style={{cursor:"pointer"}} className="text-primary" onClick={()=>setLogin(false)}>Login</span></div>
         </form>
         </Container>}
@@ -111,8 +113,3 @@ function Register(){
     )
 }
 export default Register
-            {/* <div className="mb-4">
-                <label for="number1" className="text-primary">phone number</label>
-                <input {...register("phone")} id="number1"type="number" placeholder="phone number"/>
-                {errors.phone&&<small className="d-block text-danger">{errors.phone.message}</small>}
-            </div> */}
