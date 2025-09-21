@@ -80,7 +80,8 @@ function Managment() {
             {showForm && (actionType === "Add New Product" || oneProduct.loading)&& <Form action={actionType} setShowForm={setShowForm} product={oneProduct?oneProduct:{}} />}
             <h2 className="mb-4">Product Management</h2>
             <Button variant="outline-success" className="mb-3" onClick={() => {  dispatch(resetAddOneProduct()); setActionType("Add New Product");setShowForm(true)}}>Add New Product</Button>
-            <table className="table manage-table table-striped">
+            <div className="holder">
+              <table className="table manage-table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Image</th>
@@ -105,6 +106,7 @@ function Managment() {
                     ))}
                 </tbody>
             </table>
+            </div> 
         </div>}
         </>
     )

@@ -96,9 +96,50 @@
     .manage-table{
         overflow: auto;
     }
-    .manage-table .description{
+    
+}
+.manage-table .description{
         max-width: 150px;
         height: 150px;
         overflow: auto;
-    }
+}
+.manage-table td .email-box{
+    width: 50px;
+}
+.manage-table td .email-box span{
+    position: sticky;
+    background-color: #eee;
+    width: fit-content;
+    cursor: pointer;
+}
+.manage-table td .email-box .full{
+    display: none;
+}
+.manage-table td .email-box:hover .full{
+    display: block;
+}
+.manage-table td .email-box:hover .short{
+    display: none;
+}
+.sideBar{
+    width: fit-content;
+    position:fixed;
+    top: 100px;
+    left: -15px;
+    background-color: #c4c1c1;
+    padding: 10px;
+    padding-left: 15px;
+    z-index: 9999999;
+    border-radius: 15px;
+}
+.sideBar .side{
+    border-bottom: 2px #eee solid;
+    color:#0677f0;
+    transition: 0.2s;
+    padding: 6px 4px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.sideBar .side:hover{
+    background-color: white;
 }

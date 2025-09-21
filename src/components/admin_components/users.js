@@ -12,7 +12,6 @@ function Users(){
     const navigate=useNavigate()
     const {loading,data}=useSelector(state=>state.getUsers)
     const users=data?.orders||[]
-    console.log(users)
     const login=useSelector(state=>state.adminLogin.userInfo)
     useEffect(()=>{
           const admin = localStorage.getItem('token');
@@ -46,6 +45,9 @@ function Users(){
         useEffect(()=>{
             dispatch(getUsersOrders())
         },[])
+        const showOrders=(data)=>{
+          console.log(data)
+        }
     return(
         <>
         {loading&&<Spinner />}
@@ -53,7 +55,8 @@ function Users(){
             <h2 className="text-primary">
                 Users
             </h2>
-            <table className="table manage-table table-striped">
+            <div className="holder">
+              <table className="table manage-table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -61,7 +64,7 @@ function Users(){
                         <th>Phone</th>
                         <th>Orders</th>
                         <th>Address</th>
-                        <th>LastPayment</th>
+                        <th>Payment Method</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +73,14 @@ function Users(){
                         return(
                             <tr key={user._id}>
                                 <td>{user.name}</td>
-                                <td className="text-primary">{user.email}</td>
+                                <td className="text-primary">
+                                  <div class="email-box">
+                                    <span class="short">{user.email.slice(0, 5)}...</span>
+                                    <span class="full">{user.email}</span>
+                                  </div>
+                                </td>
                                 <td>{user.phone}</td>
-                                <td><div style={{cursor:"pointer"}} className="text-success">showOrder</div></td>
+                                <td><div style={{cursor:"pointer"}} onClick={()=>showOrders(user.items)} className="text-success">showOrder</div></td>
                                 <td>{user.address.addressText}</td>
                                 <td>{user.typeOfPayment}</td>
                             </tr>
@@ -81,6 +89,8 @@ function Users(){
                     }
                 </tbody>
             </table>
+            </div>
+            
         </Container>}
         </>
     )
