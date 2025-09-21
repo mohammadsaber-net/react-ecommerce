@@ -61,6 +61,7 @@ function Users(){
                         <th>Phone</th>
                         <th>Orders</th>
                         <th>Address</th>
+                        <th>LastPayment</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +74,7 @@ function Users(){
                                 <td>{user.phone}</td>
                                 <td><div style={{cursor:"pointer"}} className="text-success">showOrder</div></td>
                                 <td>{user.address.addressText}</td>
+                                <td>{user.typeOfPayment}</td>
                             </tr>
                         )
                     })

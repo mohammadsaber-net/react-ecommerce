@@ -42,7 +42,7 @@ function MapAddressPicker(props) {
       addressText: fetchedAddress
     };
     const userInfo=JSON.parse(localStorage.getItem("userInfo"))
-    const items=localStorage.getItem("order")
+    const items=JSON.parse(localStorage.getItem("order"))
     let typeOfPayment="cash"
     if(props.visa==="visa")typeOfPayment="visa"
     const orderInfo={
