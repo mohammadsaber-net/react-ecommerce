@@ -20,34 +20,34 @@ function Managment() {
   const login=useSelector(state=>state.adminLogin.userInfo)
   const [managment,setManagment]=useState(false)
   const [loadingProductId, setLoadingProductId] = useState(null);
-  useEffect(()=>{
-      const admin = localStorage.getItem('token');
-      if (admin) {
-        try {
-          const decodedToken = jwtDecode(admin);
-          if (decodedToken.exp * 1000 < Date.now()) {
-            localStorage.removeItem("token");
-            setManagment(false);
-            navigate("/login");
-            toast.error("Session expired. Please log in again.");
-            return;
-          }
-          if (decodedToken.role === 'ADMIN') {
-            setManagment(true);
-          }else{
-            navigate("/")
-            setManagment(false);
-          }
-        } catch (error) {
-          navigate("/")
-          setManagment(false);
-          console.error("Failed to decode token:", error);
-        }
-      }else{
-        navigate("/")
-        setManagment(false);
-      }
-    }, [login]);
+  // useEffect(()=>{
+  //     const admin = localStorage.getItem('token');
+  //     if (admin) {
+  //       try {
+  //         const decodedToken = jwtDecode(admin);
+  //         if (decodedToken.exp * 1000 < Date.now()) {
+  //           localStorage.removeItem("token");
+  //           setManagment(false);
+  //           navigate("/login");
+  //           toast.error("Session expired. Please log in again.");
+  //           return;
+  //         }
+  //         if (decodedToken.role === 'ADMIN') {
+  //           setManagment(true);
+  //         }else{
+  //           navigate("/")
+  //           setManagment(false);
+  //         }
+  //       } catch (error) {
+  //         navigate("/")
+  //         setManagment(false);
+  //         console.error("Failed to decode token:", error);
+  //       }
+  //     }else{
+  //       navigate("/")
+  //       setManagment(false);
+  //     }
+  //   }, [login]);
   const deletion = (id) => {
     dispatch(deleteProduct(id));
   };
@@ -75,7 +75,7 @@ function Managment() {
 
     return (
         <>
-        {managment && <div className="container mt-80">
+        <div className="container mt-80">
             {allProducts.length===0 && <Spinner />}
             {showForm && (actionType === "Add New Product" || oneProduct.loading)&& <Form action={actionType} setShowForm={setShowForm} product={oneProduct?oneProduct:{}} />}
             <h2 className="mb-4">Product Management</h2>
@@ -107,7 +107,7 @@ function Managment() {
                 </tbody>
             </table>
             </div> 
-        </div>}
+        </div>
         </>
     )
 }

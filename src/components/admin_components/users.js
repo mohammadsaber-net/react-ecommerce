@@ -12,35 +12,7 @@ function Users(){
     const navigate=useNavigate()
     const {loading,data}=useSelector(state=>state.getUsers)
     const users=data?.orders||[]
-    const login=useSelector(state=>state.adminLogin.userInfo)
-    useEffect(()=>{
-          const admin = localStorage.getItem('token');
-          if (admin) {
-            try {
-              const decodedToken = jwtDecode(admin);
-              if (decodedToken.exp * 1000 < Date.now()) {
-                localStorage.removeItem("token");
-                setManagment(false);
-                navigate("/login");
-                toast.error("Session expired. Please log in again.");
-                return;
-              }
-              if (decodedToken.role === 'ADMIN') {
-                setManagment(true);
-              }else{
-                navigate("/")
-                setManagment(false);
-              }
-            } catch (error) {
-              navigate("/")
-              setManagment(false);
-              console.error("Failed to decode token:", error);
-            }
-          }else{
-            navigate("/")
-            setManagment(false);
-          }
-        }, [login]);
+    
         const dispatch=useDispatch()
         useEffect(()=>{
             dispatch(getUsersOrders())
@@ -51,7 +23,7 @@ function Users(){
     return(
         <>
         {loading&&<Spinner />}
-        {managment && <Container className="mt-80">
+        <Container className="mt-80">
             <h2 className="text-primary">
                 Users
             </h2>
@@ -91,7 +63,7 @@ function Users(){
             </table>
             </div>
             
-        </Container>}
+        </Container>
         </>
     )
 }

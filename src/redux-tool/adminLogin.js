@@ -26,7 +26,13 @@ export const adminLoginSlice=createSlice({
         loading:false,
         error:null
     },
-    reducers:{},
+    reducers:{
+        resetLogin:(state)=>{
+            state.userInfo=null
+            state.loading=false
+            state.error=null
+        }
+    },
     extraReducers:(builder)=>{
         builder
         .addCase(adminLogin.pending,(state)=>{
@@ -44,8 +50,7 @@ export const adminLoginSlice=createSlice({
             state.loading=false
             state.error=action.payload
         })
-        .addDefaultCase((state,action)=>{state.userInfo=null})
     }
 })
-
+export const {resetLogin}=adminLoginSlice.actions
 export default adminLoginSlice.actions
