@@ -1,20 +1,20 @@
 
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
-export const createUser=createAsyncThunk("createUserSlice/createUser",async(data,{ rejectWithValue })=>{
-    console.log(data)
+export const createUser=createAsyncThunk("createUserSlice/createUser",async(data)=>{
     try {
         let respone=await fetch(`https://ecommerce-back-pys6.onrender.com/user/register`,{
         method:"POST",
-        body:data
+        body:data,
+        credentials:"include"
     })
     if(!respone.ok){
         const errorData=await respone.json()
-        return rejectWithValue(errorData)
+        return errorData
     }
         const responseData=await respone.json()
         return responseData
     } catch (error) {
-        return rejectWithValue(error.message)
+        throw error.message
     }
 })
 export const createUserSlice=createSlice({

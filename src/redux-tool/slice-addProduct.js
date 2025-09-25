@@ -1,12 +1,9 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const addProduct=createAsyncThunk("addProductSlice/addProduct",async(product,{ rejectWithValue })=>{
-    const token=localStorage.getItem("token");
     try{
         let data=await fetch("https://ecommerce-back-pys6.onrender.com/products",{
             method:"POST",
-            headers:{
-                "Authorization": `Bearer ${token}`
-            },
+            credentials:"include",
         body:product
     });
      if (!data.ok) {

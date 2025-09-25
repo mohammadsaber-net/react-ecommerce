@@ -1,4 +1,3 @@
-
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,13 +6,13 @@ import "./navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import {jwtDecode}from "jwt-decode";
-import { setIsAdmin } from '../redux-tool/isAdmin';
 import { resetLogin } from '../redux-tool/adminLogin';
-
+import { fetchAuthentication } from '../redux-tool/authentication';
+import { toast } from 'react-toastify';
 function Navbarr(){
   let login=useSelector(state=>state.adminLogin)
   let register=useSelector(state=>state.addUser)
+  const data = useSelector((state) => state.checkAuth);
   let number=useSelector(state=>state.cart)
   const navigate =useNavigate()
   const [cart,setCart]=useState(0)
@@ -21,16 +20,37 @@ function Navbarr(){
   const [logOut,setLogOut]=useState(false)
   useEffect(()=>{
     setCart(number?.length||0)
-    if(login.userInfo?.status==="SUCCESS"||register.data?.status==="SUCCESS"){
-      setLogOut(true)
+    // if(login.userInfo?.status==="SUCCESS"||register.data?.status==="SUCCESS"){
+    //   setLogOut(true)
+    //   // dispatch(fetchAuthentication());
+    //   navigate("/")
+    // }
+  },[number])
+  const changeLoginState = async () => {
+  const respone=await fetch(`http://localhost:3001/user/logout`,{
+        method: "POST",
+        credentials: "include"
+    })
+    if(respone.ok){
+      const data=await respone.json()
+      if(data.status==="SUCCESS"){
+        dispatch(resetLogin());
+        dispatch(fetchAuthentication());
+        navigate("/login");
+        setLogOut(false)
+      }else{
+      toast.error("failed to logOut")
     }
-  },[number,login.userInfo,register.data])
-  const changeLoginState=()=>{
-    navigate("/login")
-    setLogOut(false)
-    localStorage.removeItem("token")
-    dispatch(resetLogin())
-  }
+    }else{
+      toast.error("failed to logOut")
+    }
+  
+};
+useEffect(() => {
+    if (data.data?.auth) {
+      return setLogOut(true)
+    }
+  }, [data?.data]);
     return(
       <Navbar  className="fixed fixed-top bg-danger text-primary pe-3 ps-3">
       
@@ -39,8 +59,6 @@ function Navbarr(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
             <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
-            {/* {managment && <Link to={"/managment"} className='nav-link text-white'>Managment</Link>}
-            {managment && <Link to={"/users"} className='nav-link text-white'>Users</Link>} */}
             {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className='nav-link text-white'>logOut</Link>}
           </Nav>
         </Navbar.Collapse>

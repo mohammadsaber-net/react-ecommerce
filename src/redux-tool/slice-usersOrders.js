@@ -1,12 +1,11 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const getUsersOrders=createAsyncThunk("getUsersOrdersSlice/getUsersOrders",async()=>{
-    const token=localStorage.getItem("token")
     try {
-        const response=await fetch("https://ecommerce-back-pys6.onrender.com/order/purchasement",{
+        const response=await fetch("http://localhost:3001/order/purchasement",{
         headers:{
-            "Authorization": `bearer ${token}`,
-            "Content-Type": "application/json"
-        }
+            "Content-Type": "application/json",
+        },
+        credentials:"include"
     })
     if(!response.ok){
         const errorData=await response.json()

@@ -35,13 +35,14 @@ function MapAddressPicker(props) {
     }
   }, [position]);
   const cash=useSelector(state=>state.sendingOrder)
+  console.log(cash)
   const dispatch=useDispatch()
+  const userInfo=useSelector((state) => state.checkAuth.data)
   const handleConfirm = () => {
     const locationData = {
       coords: position,
       addressText: fetchedAddress
     };
-    const userInfo=JSON.parse(localStorage.getItem("userInfo"))
     const items=JSON.parse(localStorage.getItem("order"))
     let typeOfPayment="cash"
     if(props.visa==="visa")typeOfPayment="visa"
@@ -79,7 +80,7 @@ function MapAddressPicker(props) {
         </div>
       )}
       <button
-        className="btn btn-success"
+        className={`btn btn-success ${cash.data?.status==="SUCCESS"&&"d-none"}`}
         onClick={handleConfirm}
         disabled={!position}
       >

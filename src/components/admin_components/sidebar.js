@@ -11,10 +11,10 @@ function SideBar(){
             <FontAwesomeIcon className={`sideBarIcon ${width?'text-primary':''}`} onClick={()=>setWidth(!width)} icon={width?faXmark :faBars}/>
             <div>
             <div className="side">
-            <Link to={"/managment"} className='nav-link d-flex gap-2 justify-content-center align-items-center'>Managment <FontAwesomeIcon icon={faUserShield} /></Link>
+            <Link to={"/managment"} onClick={()=>setWidth(false)} className='nav-link d-flex gap-2 justify-content-center align-items-center'>Managment <FontAwesomeIcon icon={faUserShield} /></Link>
             </div>
             <div className="side">
-            <Link to={"/users"} className='nav-link d-flex gap-2 justify-content-center align-items-center'>Users  <FontAwesomeIcon icon={faUser} /></Link>
+            <Link to={"/users"} onClick={()=>setWidth(false)} className='nav-link d-flex gap-2 justify-content-center align-items-center'>Users  <FontAwesomeIcon icon={faUser} /></Link>
             </div>
             </div>
         </div>

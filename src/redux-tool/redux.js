@@ -9,12 +9,12 @@ import { addProductSlice } from "./slice-addProduct";
 import {  adminLoginSlice } from "./adminLogin";
 import { sliceDeleteProduct } from "./slice-deleteProduct";
 import { updatedProductSlice } from "./slice-updateProduct";
-import { isAdminSlice } from "./isAdmin";
 import {  createUserSlice } from "./slice-register";
 import { paymentSlice } from "./paymentSlice";
 import { totalPrice } from "./slice-totalPrice";
 import { sendingOrderSlice } from "./confirmOrder";
 import { getUsersOrdersSlice } from "./slice-usersOrders";
+import { authenticationSlice } from "./authentication";
 export const store =configureStore({
     reducer:{
         products:productSlice.reducer,
@@ -27,11 +27,11 @@ export const store =configureStore({
         adminLogin:adminLoginSlice.reducer,
         deleteProduct:sliceDeleteProduct.reducer,
         updateProduct:updatedProductSlice.reducer,
-        isAdmin:isAdminSlice.reducer,
         addUser:createUserSlice.reducer,
         payment:paymentSlice.reducer,
         totalPrice:totalPrice.reducer,
         sendingOrder:sendingOrderSlice.reducer,
-        getUsers:getUsersOrdersSlice.reducer
+        getUsers:getUsersOrdersSlice.reducer,
+        checkAuth:authenticationSlice.reducer
     }
 })

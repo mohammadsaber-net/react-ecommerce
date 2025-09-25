@@ -3,13 +3,10 @@ import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({formData, id}) => {
-    const token = localStorage.getItem("token");
-    console.log("product id in redux is :----",id);
+
     const response = await fetch(`https://ecommerce-back-pys6.onrender.com/products/${id}`, {
       method: "PATCH",
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
+      credentials:"include",
       body: formData
     });
     if (!response.ok) {

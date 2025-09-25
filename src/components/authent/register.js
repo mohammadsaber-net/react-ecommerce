@@ -12,6 +12,7 @@ import Login from "./login"
 import PhoneInput from "react-phone-input-2"
 import { createUser, resetAddUser } from "../../redux-tool/slice-register"
 import { toast } from "react-toastify"
+import { fetchAuthentication } from "../../redux-tool/authentication"
 function Register(){
     const registerState=useSelector(state=>state.addUser)
     const navigate=useNavigate()
@@ -36,12 +37,11 @@ function Register(){
   useEffect(()=>{
     if(registerState.data?.status==="SUCCESS"){
         toast.success("you've signed up successfully")
-        localStorage.setItem("token",registerState.data.body.user.token)
         dispatch(resetAddUser())
+        dispatch(fetchAuthentication())
         navigate("/")
     }else if(registerState.data?.status==="FAIL" || registerState.data?.status==="ERROR"){
         dispatch(resetAddUser())
-        console.log(registerState.data.message)
         toast.error(`failed due to ${registerState.data.message}`)
     }
   },[registerState.data])

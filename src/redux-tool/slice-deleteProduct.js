@@ -2,14 +2,10 @@ import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const deleteProduct = createAsyncThunk(
   "deleteProduct/delete",
   async (id, { rejectWithValue }) => {
-    const token = localStorage.getItem("token");
-
     try {
       const response = await fetch(`https://ecommerce-back-pys6.onrender.com/products/${id}`, {
         method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
+        credentials:"include"
       });
 
       const data = await response.json();

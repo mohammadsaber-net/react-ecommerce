@@ -10,6 +10,7 @@ import Register from "./register";
 import { adminLogin } from "../../redux-tool/adminLogin";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { fetchAuthentication, resetAuthentication } from "../../redux-tool/authentication";
 function Login(){
   const navigate=useNavigate()
   const {
@@ -31,6 +32,7 @@ function Login(){
       if(admin.userInfo.status==="FAIL"||admin.userInfo.status==="ERROR"){
       toast.error(admin.userInfo.message)
     }else if(admin.userInfo.status==="SUCCESS"){
+      dispatch(fetchAuthentication())
       navigate("/")
       toast.success("login successful")
     }

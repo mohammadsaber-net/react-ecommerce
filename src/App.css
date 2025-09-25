@@ -23,6 +23,9 @@ body {
 .mt-80{
   margin-top: 80px;
 }
+/* .d-none{
+  pointer-events: none;
+} */
 .holder{
   max-width: 1000px;
   width: 100%;

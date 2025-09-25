@@ -1,5 +1,4 @@
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 export const adminLogin=createAsyncThunk("adminLogin/adminLogin",async(admin)=>{
     try{
         let data=await fetch("https://ecommerce-back-pys6.onrender.com/user/login",{
@@ -7,6 +6,7 @@ export const adminLogin=createAsyncThunk("adminLogin/adminLogin",async(admin)=>{
             headers:{
                 "Content-Type":"application/json"
             },
+            credentials: "include",
             body:JSON.stringify(admin)
         })
         let res=await data.json()
@@ -41,10 +41,6 @@ export const adminLoginSlice=createSlice({
         .addCase(adminLogin.fulfilled,(state,action)=>{
             state.loading=false
             state.userInfo=action.payload
-            if(action.payload.status==="SUCCESS"){
-                localStorage.setItem("token",action.payload.token);
-                localStorage.setItem("userInfo",JSON.stringify(action.payload.email));
-            }
         })
         .addCase(adminLogin.rejected,(state,action)=>{
             state.loading=false

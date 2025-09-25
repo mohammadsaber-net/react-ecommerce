@@ -7,19 +7,19 @@ import "./cart.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons/faCartArrowDown"
 import { useEffect, useState } from "react"
-import { jwtDecode } from "jwt-decode"
-import { toast } from "react-toastify"
 import Confirmation from "./confirmation"
 import { totalOrder } from "../../redux-tool/slice-totalPrice"
+import { toast } from "react-toastify"
 function Cart(){
     const cart=useSelector(state=>state.cart)
     const dispatch=useDispatch()
     const [total,setTotal]=useState(0)
     const [confirmation,setConfiramtion]=useState(false)
-    useEffect(()=>{
-        const orderFromLocal = JSON.parse(localStorage.getItem("order"));
-        if (orderFromLocal && Array.isArray(orderFromLocal) && orderFromLocal.length > 0) {
-        dispatch(addToCart(orderFromLocal));
+useEffect(()=>{
+    if(localStorage.getItem("order")){
+        dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
+    }else{
+       dispatch(removeCart()) 
     }
 },[])
     useEffect(() => {
@@ -29,24 +29,17 @@ function Cart(){
     setTotal(totalMoney.toFixed(2))
     dispatch(totalOrder(totalMoney))
 }, [cart])
-const navigate=useNavigate()       
-const redirctToBay=()=>{
-    const token = localStorage.getItem('token');
-     if (token) {
-        const decodedToken = jwtDecode(token);
-        if (decodedToken.exp * 1000 < Date.now()) {
-            toast.error("please login again")
-            navigate("/login")
-            return;
-        }
-        setConfiramtion(true)
-        }else{
-            toast.info("to continue please log in first")
-            navigate("/login")
-        }
+const navigate=useNavigate()  
+const data = useSelector((state) => state.checkAuth);
+const orderNow=()=>{
+    if (data.data?.auth) {
+       return setConfiramtion(true)
     }
-        return(
-            <div className="container mt-80">
+    toast.info("please login first")
+    navigate("/login")
+}
+    return(
+        <div className="container mt-80">
                 {confirmation&&<Confirmation total={total} setConfiramtion={setConfiramtion}/>}
                 <h3>your cart have <span className="text-primary">{cart.length}</span> items</h3>
                 {cart.length===0&&<div className="text-center">
@@ -90,10 +83,10 @@ const redirctToBay=()=>{
                 </Table>
                 <div className="d-flex justify-content-between">
                 <h5>total is: {total}</h5>
-                <button onClick={()=>redirctToBay()} className="btn btn-outline-success">Order Now !</button>
+                <button onClick={()=>orderNow()} className="btn btn-outline-success">Order Now !</button>
                 </div>
-                </div>}
-            </div>
-            )
+            </div>}
+        </div>
+    )
 }
 export default Cart

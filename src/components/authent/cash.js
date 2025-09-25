@@ -13,7 +13,7 @@ function Cash({}) {
   useEffect(()=>{
     if(passing!=="cash") navigate("/")
     },[])
-  const userInfo=JSON.parse(localStorage.getItem("userInfo"))
+  const userInfo=useSelector((state) => state.checkAuth.data)
   useEffect(()=>{
     if(cash.data?.status==="FAIL"||cash.data?.status==="ERROR"){
       toast.error("failed to set your order")
@@ -25,6 +25,9 @@ function Cash({}) {
   const resertPopub=()=>{
     dispatch(resetSendingOrder())
     setConfrimed(false)
+    navigate("/")
+    toast.success("order confirmed !")
+    localStorage.removeItem("order")
   }
     
   return (

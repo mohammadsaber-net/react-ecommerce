@@ -16,7 +16,7 @@ function Visa(){
     if(passing!=="visa") navigate("/")
   },[])
 const dispatch=useDispatch()
-const userInfo=JSON.parse(localStorage.getItem("userInfo"))
+const userInfo=useSelector((state) => state.checkAuth.data)
   useEffect(()=>{
       if(cash.data?.status==="FAIL"||cash.data?.status==="ERROR"){
         toast.error("failed to set your order")
@@ -31,6 +31,13 @@ const userInfo=JSON.parse(localStorage.getItem("userInfo"))
       return ()=>{
         dispatch(resetSendingOrder());
         dispatch(resetPaymentState())
+      }
+    },[dispatch])
+    useEffect(()=>{
+      if(paymentUrl){
+        toast.success("order confirmed !")
+        toast.info("complete visa payments")
+        localStorage.removeItem("order")
       }
     },[dispatch])
     return(

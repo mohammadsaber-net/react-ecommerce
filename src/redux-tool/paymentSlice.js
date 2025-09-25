@@ -5,14 +5,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const initiatePayment = createAsyncThunk(
   'payment/initiate',
   async (amount, { rejectWithValue }) => {
-    const token=localStorage.getItem("token")
     try {
-      const res = await fetch("https://ecommerce-back-pys6.onrender.com/paymob/pay", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
+      const res = await fetch("https://ecommerce-back-pys6.onrender.com/paymob/pay",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            credentials:"include",
         body: JSON.stringify({ amount }),
       });
 
