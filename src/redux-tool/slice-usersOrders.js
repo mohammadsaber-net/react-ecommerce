@@ -1,7 +1,7 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const getUsersOrders=createAsyncThunk("getUsersOrdersSlice/getUsersOrders",async()=>{
     try {
-        const response=await fetch("http://localhost:3001/order/purchasement",{
+        const response=await fetch("https://ecommerce-back-pys6.onrender.com/order/purchasement",{
         headers:{
             "Content-Type": "application/json",
         },

@@ -27,7 +27,7 @@ function Navbarr(){
     // }
   },[number])
   const changeLoginState = async () => {
-  const respone=await fetch(`http://localhost:3001/user/logout`,{
+  const respone=await fetch(`https://ecommerce-back-pys6.onrender.com/user/logout`,{
         method: "POST",
         credentials: "include"
     })
