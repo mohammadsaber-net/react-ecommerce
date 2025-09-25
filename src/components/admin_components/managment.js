@@ -7,7 +7,6 @@ import Form from "./form";
 import Spinner from "../spinner&slider/spinner";
 import { fetchOneProduct, resetAddOneProduct } from "../../redux-tool/slice-one-product";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 function Managment() {
   const navigate = useNavigate();
@@ -17,37 +16,7 @@ function Managment() {
   const allProducts = useSelector((state) => state.products);
   const oneProduct = useSelector((state) => state.oneProduct);
   const deleteProductState=useSelector(state=>state.deleteProduct);
-  const login=useSelector(state=>state.adminLogin.userInfo)
-  const [managment,setManagment]=useState(false)
   const [loadingProductId, setLoadingProductId] = useState(null);
-  // useEffect(()=>{
-  //     const admin = localStorage.getItem('token');
-  //     if (admin) {
-  //       try {
-  //         const decodedToken = jwtDecode(admin);
-  //         if (decodedToken.exp * 1000 < Date.now()) {
-  //           localStorage.removeItem("token");
-  //           setManagment(false);
-  //           navigate("/login");
-  //           toast.error("Session expired. Please log in again.");
-  //           return;
-  //         }
-  //         if (decodedToken.role === 'ADMIN') {
-  //           setManagment(true);
-  //         }else{
-  //           navigate("/")
-  //           setManagment(false);
-  //         }
-  //       } catch (error) {
-  //         navigate("/")
-  //         setManagment(false);
-  //         console.error("Failed to decode token:", error);
-  //       }
-  //     }else{
-  //       navigate("/")
-  //       setManagment(false);
-  //     }
-  //   }, [login]);
   const deletion = (id) => {
     dispatch(deleteProduct(id));
   };

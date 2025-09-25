@@ -1,5 +1,5 @@
 
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import './App.css'; 
 import Navbar from './components/navbar';
 import Cart from './components/cart/cart-car';
@@ -32,11 +32,14 @@ function App() {
   useEffect(() => {
     dispatch(fetchAuthentication())
   }, [dispatch]);
+  const navigate =useNavigate()
   useEffect(() => {
     if (data.data?.auth && data.data?.role === 'ADMIN') {
       setManagment(true)
       toast.success(`welcome mr: ${data.data?.name || "mohammad"}`)
       return
+    }else{
+      navigate("/")
     }
     return setManagment(false)
   }, [data?.data]);

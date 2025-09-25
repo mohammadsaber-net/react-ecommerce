@@ -1,13 +1,15 @@
-import { jwtDecode } from "jwt-decode";
+
 import { useEffect} from "react";
 import { Container} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersOrders } from "../../redux-tool/slice-usersOrders";
 import Spinner from "../spinner&slider/spinner";
+import { useNavigate } from "react-router-dom";
 
 function Users(){
     const {loading,data}=useSelector(state=>state.getUsers)
     const users=data?.orders||[]
+    const navigate=useNavigate()
         const dispatch=useDispatch()
         useEffect(()=>{
             dispatch(getUsersOrders())
