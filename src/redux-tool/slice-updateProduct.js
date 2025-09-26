@@ -4,7 +4,7 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({formData, id}) => {
 
-    const response = await fetch(`https://ecommerce-back-pys6.onrender.com/products/${id}`, {
+    const response = await fetch(`/products/${id}`, {
       method: "PATCH",
       credentials:"include",
       body: formData

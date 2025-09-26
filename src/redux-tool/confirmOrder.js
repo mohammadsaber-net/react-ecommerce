@@ -2,7 +2,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 export const sendingOrder=createAsyncThunk("sendingOrderSlice/sendingOrder",async(order)=>{
     try {
-        const response=await fetch("https://ecommerce-back-pys6.onrender.com/order/payment",{
+        const response=await fetch("/order/payment",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

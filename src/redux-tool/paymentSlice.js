@@ -6,7 +6,7 @@ export const initiatePayment = createAsyncThunk(
   'payment/initiate',
   async (amount, { rejectWithValue }) => {
     try {
-      const res = await fetch("https://ecommerce-back-pys6.onrender.com/paymob/pay",{
+      const res = await fetch("/paymob/pay",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

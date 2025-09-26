@@ -1,7 +1,7 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const addProduct=createAsyncThunk("addProductSlice/addProduct",async(product,{ rejectWithValue })=>{
     try{
-        let data=await fetch("https://ecommerce-back-pys6.onrender.com/products",{
+        let data=await fetch("/products",{
             method:"POST",
             credentials:"include",
         body:product

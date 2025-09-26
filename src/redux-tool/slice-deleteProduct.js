@@ -3,7 +3,7 @@ export const deleteProduct = createAsyncThunk(
   "deleteProduct/delete",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(`https://ecommerce-back-pys6.onrender.com/products/${id}`, {
+      const response = await fetch(`/products/${id}`, {
         method: "DELETE",
         credentials:"include"
       });
