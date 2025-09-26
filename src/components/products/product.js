@@ -13,6 +13,7 @@ function Product(){
     const dispatch=useDispatch()
     // const [darkMode, setDarkMode] = useState(false);
     const products=useSelector(state=>state.products)
+    const [search,setSearch]=useState("")
     useEffect(() => {
       const faders = document.querySelectorAll('.fade-up');
       const appearOnScroll = new IntersectionObserver((entries, observer) => {
@@ -29,7 +30,8 @@ function Product(){
       });
 
       return () => appearOnScroll.disconnect();
-    }, [products]);
+    }, [products, search]);
+
     useEffect(()=>{
         dispatch(fetchProduct())
         if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
@@ -50,6 +52,7 @@ function Product(){
      }
      dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     }
+    
     return (
     // <div className={darkMode ? "dark-mode" : ""}>
         <>
@@ -57,15 +60,22 @@ function Product(){
           <Hero />
           
        { <Container className='sub-container my-5'>
-          {products.length>0&&<div className=' category-parent bg-primary'>
+          {products.length>0&&
+          <div className=' category-parent bg-primary'>
             <Link to={`/products/men's clothing`} className='category'>men's clothing</Link>
             <Link to={`/products/jewelery`} className='category'>jewelery</Link>
             <Link to={`/products/electronics`} className='category'>electronics</Link>
             <Link to={`/products/women's clothing`} className='category'>women's clothing</Link>
           </div>}
+          <div className='mt-2 mb-3 position-relative'>
+            <input type='text' className='form-control bg-light text-primary w-75' placeholder='search by product name' value={search} onChange={(letters)=>setSearch(letters.target.value)} />
+          </div>
           <div
             id="shopping" className="row">
-            {products.map(product => (
+            {products.filter(product =>
+             product.title.toLowerCase().includes(search.toLowerCase())
+              ).map(product => (
+              
               <div
                 key={product._id}
                 className="cloumns fade-up col-12 col-sm-6 col-md-4 col-xl-3"
