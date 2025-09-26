@@ -4,7 +4,7 @@ export const fetchAuthentication = createAsyncThunk(
   'authenticationSlice/fetchCurrentUser',
   async () => {
     try {
-      const res = await fetch('https://ecommerce-back-pys6.onrender.com/user/checkAuth', {
+      const res = await fetch('/user/checkAuth', {
         method:"get",
         credentials: 'include',
       });

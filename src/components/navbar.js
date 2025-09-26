@@ -20,7 +20,7 @@ function Navbarr(){
     setCart(number?.length||0)
   },[number])
   const changeLoginState = async () => {
-  const respone=await fetch(`https://ecommerce-back-pys6.onrender.com/user/logout`,{
+  const respone=await fetch(`/user/logout`,{
         method: "POST",
         credentials: "include"
     })

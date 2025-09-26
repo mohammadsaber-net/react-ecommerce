@@ -2,7 +2,7 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 export const createUser=createAsyncThunk("createUserSlice/createUser",async(data)=>{
     try {
-        let respone=await fetch(`https://ecommerce-back-pys6.onrender.com/user/register`,{
+        let respone=await fetch(`/user/register`,{
         method:"POST",
         body:data,
         credentials:"include"

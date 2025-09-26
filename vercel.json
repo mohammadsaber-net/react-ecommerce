@@ -1,8 +1,8 @@
 {
   "rewrites": [
     { 
-    "source": "/user/:path*",
-    "destination": "https://ecommerce-back-pys6.onrender.com/user/:path*" 
+    "source": "/user/:path",
+    "destination": "https://ecommerce-back-pys6.onrender.com/user/:path" 
      }
   ]
 }

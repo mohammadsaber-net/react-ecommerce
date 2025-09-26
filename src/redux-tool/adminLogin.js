@@ -1,7 +1,7 @@
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 export const adminLogin=createAsyncThunk("adminLogin/adminLogin",async(admin)=>{
     try{
-        let data=await fetch("https://ecommerce-back-pys6.onrender.com/user/login",{
+        let data=await fetch("/user/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
