@@ -63,7 +63,7 @@ function Managment() {
                 <tbody>
                     {allProducts.map(product => (
                         <tr key={product._id}>
-                            <td><img style={{ width: "50px", height: "50px" }} src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} alt={product.title} /></td>
+                            <td><img style={{ width: "50px", height: "50px" }} src={product.image} alt={product.title} /></td>
                             <td>{product.title}</td>
                             <td>{product.category}</td>
                             <td ><div className="description">{product.description}</div></td>

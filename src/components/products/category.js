@@ -45,7 +45,7 @@ function Category(){
             return(
               <div className='cloumns col-12 col-sm-6 col-md-4 fade-up col-xl-3'  style={{marginBottom:"20px"}} key={product._id}>
             <Card className='content'  key={product.id}>
-      <img className='img-fluid' style={{height:"200px"}}  src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} />
+      <img className='img-fluid' style={{height:"200px"}}  src={product.image} />
       <Card.Body>
         <Link to={`/product/${product.id}`}>
         <Card.Title className="title">{product.title}</Card.Title>

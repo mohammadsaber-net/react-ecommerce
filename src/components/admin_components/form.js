@@ -93,7 +93,7 @@ function Form(params){
                  <label htmlFor="productImage">Image URL</label>
                  <div className="d-flex align-items-center justify-content-between gap-1">
                      <input {...register("image")} type="file" onChange={(event)=>setImage(event.target.files[0])} id="productImage" className="form-control" />
-                     <img style={{width:"90px",height:"70px"}} src={image?URL.createObjectURL(image):`https:ecommerce-back-pys6.onrender.com/images/${product.image}`} alt={"selected image"} />
+                     <img style={{width:"90px",height:"70px"}} src={image?URL.createObjectURL(image):product.image} alt={"selected image"} />
                  </div>
                  {errors.image&&<small className="d-block text-danger">{errors.image.message}</small>}
              </div>

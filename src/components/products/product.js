@@ -86,7 +86,7 @@ function Product(){
             //  products-image
               className='img-fluid'
               style={{ height: "200px" }}
-              src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`}
+              src={product.image}
               alt={product.title}
               />
       <Card.Body>
