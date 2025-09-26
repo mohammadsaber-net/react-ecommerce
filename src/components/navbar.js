@@ -10,8 +10,6 @@ import { resetLogin } from '../redux-tool/adminLogin';
 import { fetchAuthentication } from '../redux-tool/authentication';
 import { toast } from 'react-toastify';
 function Navbarr(){
-  let login=useSelector(state=>state.adminLogin)
-  let register=useSelector(state=>state.addUser)
   const data = useSelector((state) => state.checkAuth);
   let number=useSelector(state=>state.cart)
   const navigate =useNavigate()
@@ -20,11 +18,6 @@ function Navbarr(){
   const [logOut,setLogOut]=useState(false)
   useEffect(()=>{
     setCart(number?.length||0)
-    // if(login.userInfo?.status==="SUCCESS"||register.data?.status==="SUCCESS"){
-    //   setLogOut(true)
-    //   // dispatch(fetchAuthentication());
-    //   navigate("/")
-    // }
   },[number])
   const changeLoginState = async () => {
   const respone=await fetch(`https://ecommerce-back-pys6.onrender.com/user/logout`,{
@@ -62,7 +55,11 @@ useEffect(() => {
             {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className='nav-link text-white'>logOut</Link>}
           </Nav>
         </Navbar.Collapse>
-      
+      {/* <div className="text-end p-3">
+              <Button variant={darkMode ? "light" : "dark"} onClick={() => setDarkMode(!darkMode)}>
+              {darkMode ? "الوضع النهاري" : "الوضع الليلي"}
+            </Button>
+        </div> */}
     </Navbar>
     )
 }

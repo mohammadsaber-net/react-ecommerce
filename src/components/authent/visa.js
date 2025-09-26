@@ -39,7 +39,7 @@ const userInfo=useSelector((state) => state.checkAuth.data)
         toast.info("complete visa payments")
         localStorage.removeItem("order")
       }
-    },[dispatch])
+    },[paymentUrl])
     return(
     <div className="container mt-80">
       <h3>total price : {total}</h3>

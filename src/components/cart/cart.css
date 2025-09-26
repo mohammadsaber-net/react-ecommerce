@@ -38,6 +38,9 @@
     .cart-table td {
         padding: 5px !important;
     }
+    .image-cart{
+        max-width: 80%;
+    }
 }
 .image-cart {
     cursor: pointer;

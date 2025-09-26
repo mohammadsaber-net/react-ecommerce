@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import {useDispatch, useSelector } from 'react-redux';
 import { fetchAuthentication } from './redux-tool/authentication';
 import { toast, ToastContainer } from 'react-toastify';
+import ScrollToTop from './components/scrollToTop';
 
 function App() {
   const [managment,setManagment]=useState(false)
@@ -45,6 +46,7 @@ function App() {
   }, [data?.data]);
   return (
     <div className='App'>
+      <ScrollToTop />
       <Navbar /> 
       {managment&&<SideBar />} 
       <Routes>

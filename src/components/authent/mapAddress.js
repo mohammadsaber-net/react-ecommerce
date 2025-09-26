@@ -35,7 +35,6 @@ function MapAddressPicker(props) {
     }
   }, [position]);
   const cash=useSelector(state=>state.sendingOrder)
-  console.log(cash)
   const dispatch=useDispatch()
   const userInfo=useSelector((state) => state.checkAuth.data)
   const handleConfirm = () => {
@@ -56,7 +55,6 @@ function MapAddressPicker(props) {
     }
     dispatch(sendingOrder(orderInfo))
   };
-
   return (
     <div className="map-address-picker">
       <h5>set your address on map : </h5>

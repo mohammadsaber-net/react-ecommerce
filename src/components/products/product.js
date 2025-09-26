@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,10 +9,27 @@ import "./product.css"
 import { Link,} from 'react-router-dom';
 import Spinner from '../spinner&slider/spinner';
 import Hero from '../spinner&slider/hero';
-import { motion } from 'framer-motion';
 function Product(){
     const dispatch=useDispatch()
+    // const [darkMode, setDarkMode] = useState(false);
     const products=useSelector(state=>state.products)
+    useEffect(() => {
+      const faders = document.querySelectorAll('.fade-up');
+      const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      faders.forEach(fade => {
+        appearOnScroll.observe(fade);
+      });
+
+      return () => appearOnScroll.disconnect();
+    }, [products]);
     useEffect(()=>{
         dispatch(fetchProduct())
         if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
@@ -33,26 +50,12 @@ function Product(){
      }
      dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     }
-    const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, duration: 0.5 }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4 }
-  }
-};
     return (
+    // <div className={darkMode ? "dark-mode" : ""}>
         <>
           {products.length===0 && <Spinner />}  
           <Hero />
+          
        { <Container className='sub-container my-5'>
           {products.length>0&&<div className=' category-parent bg-primary'>
             <Link to={`/products/men's clothing`} className='category'>men's clothing</Link>
@@ -60,21 +63,15 @@ const item = {
             <Link to={`/products/electronics`} className='category'>electronics</Link>
             <Link to={`/products/women's clothing`} className='category'>women's clothing</Link>
           </div>}
-            <motion.div
-          id="shopping"
-          key={products.length}
-          className="row"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-        {
-          products.map(product=>(
-              
-              <motion.div variants={item} whileHover={{ scale: 1.03 }} className='cloumns col-12 col-sm-6 col-md-4 col-xl-3' key={product._id} style={{marginBottom:"20px"}}>
-                
+          <div
+            id="shopping" className="row">
+            {products.map(product => (
+              <div
+                key={product._id}
+                className="cloumns fade-up col-12 col-sm-6 col-md-4 col-xl-3"
+                style={{ marginBottom: "20px" }}
+              >  
             <Card className='content'  key={product._id}>
-             
             <img
             //  products-image
               className='img-fluid'
@@ -93,15 +90,16 @@ const item = {
         </div>
       </Card.Body>
     </Card>
-            </motion.div>
+            </div>
             )
             
           )
         }
-        </motion.div>
+        </div>
         </Container>
 } 
         </>
+        // </div>
     )
 }
 export default Product

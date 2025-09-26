@@ -15,7 +15,23 @@ function Category(){
     useEffect(()=>{
        dispatch(fetchingCategory(category)) 
     },[])
-    
+    useEffect(() => {
+      const faders = document.querySelectorAll('.fade-up');
+      const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      faders.forEach(fade => {
+        appearOnScroll.observe(fade);
+      });
+
+      return () => appearOnScroll.disconnect();
+    }, [products]);
     return(
         <>
         <Hero />
@@ -27,7 +43,7 @@ function Category(){
         {
           products.map(product=>{
             return(
-              <div className='cloumns col-12 col-sm-6 col-md-4 col-xl-3'  style={{marginBottom:"20px"}} key={product._id}>
+              <div className='cloumns col-12 col-sm-6 col-md-4 fade-up col-xl-3'  style={{marginBottom:"20px"}} key={product._id}>
             <Card className='content'  key={product.id}>
       <img className='img-fluid' style={{height:"200px"}}  src={`https://ecommerce-back-pys6.onrender.com/images/${product.image}`} />
       <Card.Body>
