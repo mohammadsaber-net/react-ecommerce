@@ -15,6 +15,7 @@ import { totalPrice } from "./slice-totalPrice";
 import { sendingOrderSlice } from "./confirmOrder";
 import { getUsersOrdersSlice } from "./slice-usersOrders";
 import { authenticationSlice } from "./authentication";
+import {userRecievedSlice } from "./slice.userRecieved";
 export const store =configureStore({
     reducer:{
         products:productSlice.reducer,
@@ -32,6 +33,7 @@ export const store =configureStore({
         totalPrice:totalPrice.reducer,
         sendingOrder:sendingOrderSlice.reducer,
         getUsers:getUsersOrdersSlice.reducer,
-        checkAuth:authenticationSlice.reducer
+        checkAuth:authenticationSlice.reducer,
+        orderRecieved:userRecievedSlice.reducer,
     }
 })

@@ -42,7 +42,15 @@ function MapAddressPicker(props) {
       coords: position,
       addressText: fetchedAddress
     };
-    const items=JSON.parse(localStorage.getItem("order"))
+    const items = JSON.parse(localStorage.getItem("order")) || [];
+    const date = new Date().toISOString();
+    const received = false;
+
+    const updatedItems = items.map(item => ({
+      ...item,
+      date,
+      received
+    }));
     let typeOfPayment="cash"
     if(props.visa==="visa")typeOfPayment="visa"
     const orderInfo={
@@ -50,7 +58,7 @@ function MapAddressPicker(props) {
       email:userInfo.email,
       phone:userInfo.phone,
       typeOfPayment:typeOfPayment,
-      items:items,
+      items:updatedItems,
       address:locationData
     }
     dispatch(sendingOrder(orderInfo))

@@ -18,18 +18,13 @@ import {useDispatch, useSelector } from 'react-redux';
 import { fetchAuthentication } from './redux-tool/authentication';
 import { toast, ToastContainer } from 'react-toastify';
 import ScrollToTop from './components/scrollToTop';
+import { fetchUserRecieved } from './redux-tool/slice.userRecieved';
+import { getUsersOrders } from './redux-tool/slice-usersOrders';
 
 function App() {
   const [managment,setManagment]=useState(false)
   const data = useSelector((state) => state.checkAuth);
   const dispatch=useDispatch()
-  // useEffect(()=>{
-  //     if(login.userInfo?.status==="SUCCESS"||register.data?.status==="SUCCESS"){
-  //       setLogOut(true)
-  //       // dispatch(fetchAuthentication());
-  //       navigate("/")
-  //     }
-  //   },[login?.userInfo,register.data])
   useEffect(() => {
     dispatch(fetchAuthentication())
   }, [dispatch]);
@@ -38,17 +33,27 @@ function App() {
     if (data.data?.auth && data.data?.role === 'ADMIN') {
       setManagment(true)
       toast.success(`welcome mr: ${data.data?.name || "mohammad"}`)
+      dispatch(getUsersOrders())
       return
     }else{
       navigate("/")
     }
     return setManagment(false)
   }, [data?.data]);
+  const [number,setNumber]=useState(0)
+      const newOrders=useSelector(state=>state.getUsers.data?.orders)
+      useEffect(() => {
+      if (newOrders && newOrders.length) {
+    const allItems = newOrders.flatMap(order => order.items);
+    const notReceived = allItems.filter(item => item.received === false);
+    setNumber(notReceived.length);
+  }
+    }, [newOrders]);
   return (
     <div className='App'>
       <ScrollToTop />
       <Navbar /> 
-      {managment&&<SideBar />} 
+      {managment&&<SideBar number={number}/>} 
       <Routes>
         <Route path='/' element={<Product />} />
         <Route path='/payment/visa' element={<Visa />} />

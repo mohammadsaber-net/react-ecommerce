@@ -12,6 +12,7 @@ export const sendingOrder=createAsyncThunk("sendingOrderSlice/sendingOrder",asyn
     })
     if(!response.ok){
         const errorData=await response.json()
+        console.log("errorData",errorData)
         return errorData.message
     }
     const data =await response.json()

@@ -98,6 +98,14 @@
     }
     
 }
+@media (max-width:580px) {
+    .manage-table{
+        font-size: 12px;
+    }
+    .manage-table th, .manage-table td{
+        padding: 6px;
+    }
+}
 .manage-table .description{
         max-width: 150px;
         height: 150px;
@@ -163,4 +171,22 @@
 .sideBar .side:hover{
     background-color: white;
     color:rgb(4, 91, 252);
+}
+.receive{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    padding: 2px 4px;
+    background-color: rgb(51, 48, 221);
+    border: 1px solid rgb(51, 48, 221);
+    border-radius: 5px;
+    text-align: center;
+}
+.receive.yes{
+    background-color: rgb(48, 221, 57);
+    border: 1px solid rgb(48, 221, 57);
+    pointer-events: none;
+}
+.client{
+    max-height: 300px;
+    overflow: auto;
 }

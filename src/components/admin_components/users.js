@@ -1,26 +1,35 @@
 
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { Container} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsersOrders } from "../../redux-tool/slice-usersOrders";
+import { getUsersOrders, resetgetUsersOrders } from "../../redux-tool/slice-usersOrders";
 import Spinner from "../spinner&slider/spinner";
-import { useNavigate } from "react-router-dom";
+
+import Client from "./client";
 
 function Users(){
     const {loading,data}=useSelector(state=>state.getUsers)
+    const [orders,setOrder]=useState(false)
+    const [recentOrders, setRecentOrders] = useState([])
     const users=data?.orders||[]
-    const navigate=useNavigate()
         const dispatch=useDispatch()
+        const received=useSelector(state=>state.orderRecieved)
         useEffect(()=>{
             dispatch(getUsersOrders())
-        },[])
+            return ()=>{
+                dispatch(resetgetUsersOrders())
+            }
+        },[received.data])
         const showOrders=(data)=>{
-          console.log(data)
+           setRecentOrders(data)
+            setOrder(true)
         }
+        
     return(
         <>
         {loading&&<Spinner />}
         <Container className="mt-80">
+            {orders&&<Client userId={recentOrders._id} setOrder={setOrder}/>}
             <h2 className="text-primary">
                 Users
             </h2>
@@ -41,16 +50,26 @@ function Users(){
                     users.map((user)=>{
                         return(
                             <tr key={user._id}>
-                                <td>{user.name}</td>
+                                <td>
+                                <div className="email-box">
+                                    <span className="short">{user?.name?.slice(0, 5) ?? ''}...</span>
+                                    <span className="full">{user?.name ?? ''}</span>
+                                </div>
+                                </td>
                                 <td className="text-primary">
-                                  <div class="email-box">
-                                    <span class="short">{user.email.slice(0, 5)}...</span>
-                                    <span class="full">{user.email}</span>
-                                  </div>
+                                <div className="email-box">
+                                    <span className="short">{user?.email?.slice(0, 5) ?? ''}...</span>
+                                    <span className="full">{user?.email ?? ''}</span>
+                                </div>
                                 </td>
                                 <td>{user.phone}</td>
-                                <td><div style={{cursor:"pointer"}} onClick={()=>showOrders(user.items)} className="text-success">showOrder</div></td>
-                                <td>{user.address.addressText}</td>
+                                <td><div style={{cursor:"pointer"}} onClick={()=>showOrders(user)} className="text-success">showOrder</div></td>
+                                <td>
+                                <div className="email-box">
+                                    <span className="short">{user?.address?.addressText?.slice(0, 20) ?? ''}...</span>
+                                    <span className="full">{user?.address?.addressText ?? ''}</span>
+                                </div>
+                                </td>
                                 <td>{user.typeOfPayment}</td>
                             </tr>
                         )

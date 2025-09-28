@@ -65,7 +65,7 @@ const orderNow=()=>{
                             return(
                                 <tr key={product.product._id}>
                                     
-                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={`https://ecommerce-back-pys6.onrender.com/images/${product.product.image}`} alt={product.name}/></th>
+                                    <th style={{width:"100px",height:"100px"}}><img className="w-100 h-100" src={product.product.image} alt={product.name}/></th>
                                     <td>{product.product.title}</td>
                                     <td>{product.product.price} $</td>
                                     <td className="total-one-price">{(product.product.price * product.quantity).toFixed(1)} $</td>
