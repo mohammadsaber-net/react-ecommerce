@@ -10,8 +10,10 @@ import Register from "./register";
 import { adminLogin } from "../../redux-tool/adminLogin";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { fetchAuthentication, resetAuthentication } from "../../redux-tool/authentication";
+import { fetchAuthentication} from "../../redux-tool/authentication";
+import Copy from "./cobyInLogin";
 function Login(){
+  
   const navigate=useNavigate()
   const {
     register,
@@ -44,6 +46,7 @@ function Login(){
         <>
         
         {login&&<Container>
+          <Copy />
             <form onSubmit={handleSubmit(onSubmit)} className=" form-login">
             <div className="mb-4">
                 <label for="email1" fo className="text-primary">email</label>

@@ -103,3 +103,35 @@
     transform: rotate(-360deg);
   }
 } 
+.experment{
+  position: relative;
+  margin-top: 70px;
+  background-color: #f1f1f1;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+.experment > div{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  color: #FF3D00;
+  transition: 0.3s;
+  border: 1px solid #FF3D00;
+  cursor: pointer;
+}
+.experment > div:hover{
+  background-color: #FF3D00;
+  color: white;
+}
+.copy-box {
+  cursor: copy;
+  /* display: inline-block; */
+  user-select: none;
+}
