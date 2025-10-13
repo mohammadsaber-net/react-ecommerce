@@ -11,8 +11,8 @@ function Spinner() {
     },[products])
     return (
         <div className="parent">
-            {hint&&<div className=" hint text-white">
-              يرجي الانتظار لمدة 50 ثانية تقريا لكي يفتح الموقع <br/>  وذلك نظرا لاستخدام استضافة مجانية وهذا يكون مرة واحدة فقط
+            {hint&&<div className="hint text-white">
+              يرجي الانتظار لمدة 50 ثانية تقريبا لكي يفتح الموقع <br/>  وذلك نظرا لاستخدام استضافة مجانية وهذا يكون مرة واحدة فقط
             </div>}
             <span class="loader"></span>
         </div>

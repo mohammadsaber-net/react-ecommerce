@@ -45,7 +45,7 @@ useEffect(() => {
     }
   }, [data?.data]);
     return(
-      <Navbar  className="fixed fixed-top bg-danger text-primary pe-3 ps-3">
+      <Navbar  className="fixed fixed-top bg-danger backOfNav pe-3 ps-3">
       
         <Link to={"/"} className='navbar-brand text-white'>STORE</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

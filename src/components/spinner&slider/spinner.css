@@ -57,17 +57,20 @@
     position: absolute;
     width: 0;
     height: 100%;
-    background-color: rgb(81, 81, 253);
+    background-color: rgba(248, 8, 88, 0.384);
     border-radius: 15px;
     z-index: -1;
     right: 0;
     top: 0;
     text-align: right;
-    animation: open 50s linear;
+    animation: open 1s linear infinite;
    }
    @keyframes open{
     0%{
       width: 0;
+    }
+    90%{
+      width: 100%;
     }
     100%{
       width: 100%;

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import image from "../images/كيف-ابدا-مشروع-متجر-الكتروني.png"
 import './hero.css';
 const Hero = () => {
      const [hero, setHero] = useState('');
@@ -27,28 +28,21 @@ const Hero = () => {
         displayNextLetter();
       }, []);
   return (
-    <section className="hero-section pb-3">
-      <div className="row container align-items-center">
-        <div className="col-lg-6 text-center mt-5 mt-lg-0">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/891/891462.png"
-            
-            alt="E-commerce shopping"
-            className="hero-image"
-          />
-        </div>
-        {/* Text Content */}
-        <div className="col-lg-6 text-center text-lg-start px-4">
-          <h2 className="text-primary autotype fw-bold mb-3">
+    <section className=" hero-section d-flex justify-content-around align-items-center flex-column flex-lg-row px-3 px-lg-5" id="hero  ">
+      <img alt="Hero" className="hero-image" src={image} />
+    <div className="">
+        
+        <div className="text-center text-lg-start">
+          <h2 className="text-primary autotype fw-bold mb-4">
             {hero}
           </h2>
-          <p className="mb-4">
+          <p className="mb-2 p-2 rounded shadow-sm">
             Shop the best brands, top categories, and daily deals. Fast delivery & secure checkout.
           </p>
         </div>
-      </div>
-        <div className="text-center mt-4">
-            <a className="btn btn-primary m-auto btn-lg me-3" href="#shopping">🛍 Shop Now</a>
+    </div>
+        <div className="text-center my-2">
+            <a className="btn btn-primary hero-btn m-auto btn-lg " href="#shopping">🛍 Shop Now</a>
         </div>
     </section>
   );
