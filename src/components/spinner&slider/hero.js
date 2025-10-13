@@ -28,7 +28,7 @@ const Hero = () => {
         displayNextLetter();
       }, []);
   return (
-    <section className=" hero-section d-flex justify-content-around align-items-center flex-column flex-lg-row px-3 px-lg-5" id="hero  ">
+    <section className=" hero-section d-flex justify-content-around align-items-center flex-column px-3 " id="hero  ">
       <img alt="Hero" className="hero-image" src={image} />
     <div className="">
         
