@@ -12,10 +12,19 @@ import { toast } from 'react-toastify';
 function Navbarr(){
   const data = useSelector((state) => state.checkAuth);
   let number=useSelector(state=>state.cart)
+  const [scroll, setScroll] = useState(false);
   const navigate =useNavigate()
   const [cart,setCart]=useState(0)
   let dispatch=useDispatch()
   const [logOut,setLogOut]=useState(false)
+    useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(()=>{
     setCart(number?.length||0)
   },[number])
@@ -45,21 +54,16 @@ useEffect(() => {
     }
   }, [data?.data]);
     return(
-      <Navbar  className="fixed fixed-top bg-primary backOfNav pe-3 ps-3">
+      <Navbar id='mainNav' className={`fixed fixed-top  pe-3 ps-3 ${scroll?"bg-info":"scroll"}`}>
       
-        <Link to={"/"} className='navbar-brand text-white'>STORE</Link>
+        <Link to={"/"} className={` navbar-brand text-black ${scroll?"":"text-white"}`}>STORE</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
             <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
-            {!logOut?<Link to={"/login"} className='nav-link text-white'>login</Link>:<Link to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className='nav-link text-white'>logOut</Link>}
+            {!logOut?<Link to={"/login"} className={`nav-link text-black ${scroll?"":"text-white"}`}>login</Link>:<Link to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className={`nav-link text-black ${scroll?"":"text-white"}`}>logOut</Link>}
           </Nav>
         </Navbar.Collapse>
-      {/* <div className="text-end p-3">
-              <Button variant={darkMode ? "light" : "dark"} onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? "الوضع النهاري" : "الوضع الليلي"}
-            </Button>
-        </div> */}
     </Navbar>
     )
 }

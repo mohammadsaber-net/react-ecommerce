@@ -30,6 +30,7 @@ const Hero = () => {
   return (
     <section className=" hero-section d-flex justify-content-around align-items-center flex-column px-3 " id="hero  ">
       <img alt="Hero" className="hero-image" src={image} />
+      <span className="overlay"></span>
     <div className="">
         
         <div className="text-center text-lg-start">

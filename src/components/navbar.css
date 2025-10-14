@@ -2,3 +2,9 @@
     top: -15px;
     left:-12px;
 }
+.scroll{
+    background-color: rgba(0, 110, 255, 0.6) !important;
+}
+#mainNav {
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
