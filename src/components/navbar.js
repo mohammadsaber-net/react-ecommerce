@@ -54,7 +54,7 @@ useEffect(() => {
     }
   }, [data?.data]);
     return(
-      <Navbar id='mainNav' className={`fixed fixed-top  pe-3 ps-3 ${scroll?"bg-info":"scroll"}`}>
+      <Navbar id='mainNav' className={`fixed fixed-top  pe-3 ps-3 ${!scroll?"bg-info":"scroll"}`}>
       
         <Link to={"/"} className={` navbar-brand text-black ${scroll?"":"text-white"}`}>STORE</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
