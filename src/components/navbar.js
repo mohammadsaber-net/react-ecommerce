@@ -1,7 +1,7 @@
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "./navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, } from '@fortawesome/free-solid-svg-icons';
@@ -54,14 +54,14 @@ useEffect(() => {
     }
   }, [data?.data]);
     return(
-      <Navbar id='mainNav' className={`fixed fixed-top  pe-3 ps-3 ${!scroll?"bg-info":"scroll"}`}>
+      <Navbar id='mainNav' className={`fixed fixed-top  pe-3 ps-3 ${!scroll?"bg-info":"bg-info"}`}>
       
-        <Link to={"/"} className={` navbar-brand text-black ${scroll?"":"text-white"}`}>STORE</Link>
+        <NavLink to={"/"} className={` navbar-brand text-black text-white`}>Awesome Store</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
-            <Link to={"/cart"} className={cart>0?`text-white nav-link`:"nav-link"}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></Link>
-            {!logOut?<Link to={"/login"} className={`nav-link text-black ${scroll?"":"text-white"}`}>login</Link>:<Link to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className={`nav-link text-black ${scroll?"":"text-white"}`}>logOut</Link>}
+            <NavLink to={"/cart"} className={`${cart>0?`text-white nav-link`:"nav-link"} `}><FontAwesomeIcon icon={faCartShopping} /><span className='position-relative cart-number '>{cart}</span></NavLink>
+            {!logOut?<NavLink to={"/login"} className={`nav-link text-white `}>login</NavLink>:<NavLink to={"/login"} onClick={(e)=>{e.preventDefault(); ;changeLoginState()}} className={`nav-link text-black ${scroll?"":"text-white"}`}>logOut</NavLink>}
           </Nav>
         </Navbar.Collapse>
     </Navbar>

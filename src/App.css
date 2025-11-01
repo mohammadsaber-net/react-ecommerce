@@ -40,6 +40,9 @@ html {
 .dark-mode .title {
   color: #fff !important;
 }
+.bg-color{
+  background-color: #f0f0f0;
+}
 .holder{
   max-width: 1000px;
   width: 100%;

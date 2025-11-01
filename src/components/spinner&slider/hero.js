@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import image from "../images/كيف-ابدا-مشروع-متجر-الكتروني.png"
+import image from "../images/hero.webp"
 import './hero.css';
 const Hero = () => {
      const [hero, setHero] = useState('');
@@ -12,7 +12,7 @@ const Hero = () => {
     
         function displayNextLetter() {
           if (index < sentence.length) {
-            const nextChar = sentence.charAt(index);  // SAFELY get character
+            const nextChar = sentence.charAt(index);
             setHero(prev => prev + nextChar);
             index++;
             setTimeout(displayNextLetter, speed);
@@ -34,10 +34,10 @@ const Hero = () => {
     <div className="">
         
         <div className="text-center text-lg-start">
-          <h2 className="text-primary autotype fw-bold mb-4">
+          <h2 className="text-white autotype fw-bold mb-4">
             {hero}
           </h2>
-          <p className="mb-2 p-2 rounded shadow-sm">
+          <p className="mb-2 p-2 rounded text-white shadow-sm">
             Shop the best brands, top categories, and daily deals. Fast delivery & secure checkout.
           </p>
         </div>
