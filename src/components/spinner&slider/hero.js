@@ -39,11 +39,11 @@ const Hero = () => {
             Shop the best brands, top categories, and daily deals. Fast delivery & secure checkout.
           </p>
         </div>
-        <div className="d-flex">
-          <div className="discount">
+        <div className="d-flex hero-image-div">
+          <button className="discount text-white">
             discount 50%
-          </div>
-          <div className="hero-image-div">
+          </button>
+          <div className="">
           <img className="hero-image" src={image} alt="image" />
           </div>
         </div>
