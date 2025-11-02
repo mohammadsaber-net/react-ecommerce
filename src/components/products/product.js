@@ -9,9 +9,10 @@ import "./product.css"
 import { Link,} from 'react-router-dom';
 import Spinner from '../spinner&slider/spinner';
 import Hero from '../spinner&slider/hero';
-function Product(){
-    const dispatch=useDispatch()
-    // const [darkMode, setDarkMode] = useState(false);
+
+    function Product(){
+      // const [darkMode, setDarkMode] = useState(false);
+      const dispatch=useDispatch()
     const products=useSelector(state=>state.products)
     const [search,setSearch]=useState("")
     useEffect(() => {
@@ -36,9 +37,10 @@ function Product(){
         dispatch(fetchProduct())
         if(localStorage.getItem("order")) dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     },[])
-    const addToStorage=(data)=>{
-      if(localStorage.getItem("order")){
-        const order=JSON.parse(localStorage.getItem("order"))
+    
+const addToStorage=(data)=>{
+  if(localStorage.getItem("order")){
+    const order=JSON.parse(localStorage.getItem("order"))
         const findProduct=order.find((product)=>product.product._id===data._id)
         if(findProduct){
           findProduct.quantity += 1
@@ -47,12 +49,11 @@ function Product(){
         }
         localStorage.setItem("order",JSON.stringify(order))
         
-     }else{
-      localStorage.setItem("order",JSON.stringify([{quantity:1,product:data}]))
-     }
-     dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
+      }else{
+        localStorage.setItem("order",JSON.stringify([{quantity:1,product:data}]))
+      }
+      dispatch(addToCart(JSON.parse(localStorage.getItem("order"))))
     }
-    
     return (
     // <div className={darkMode ? "dark-mode" : ""}>
         <>
