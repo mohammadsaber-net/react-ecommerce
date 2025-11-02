@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import image from "../images/hero.webp"
+import image from "../images/bg-hero.png"
 import './hero.css';
 const Hero = () => {
      const [hero, setHero] = useState('');
@@ -29,10 +29,8 @@ const Hero = () => {
       }, []);
   return (
     <section className=" hero-section d-flex justify-content-around align-items-center flex-column px-3 " id="hero  ">
-      <img alt="Hero" className="hero-image" src={image} />
       <span className="overlay"></span>
-    <div className="">
-        
+    <div className="d-flex">
         <div className="text-center text-lg-start">
           <h2 className="text-white autotype fw-bold mb-4">
             {hero}
@@ -41,9 +39,17 @@ const Hero = () => {
             Shop the best brands, top categories, and daily deals. Fast delivery & secure checkout.
           </p>
         </div>
+        <div className="d-flex">
+          <div className="discount">
+            discount 50%
+          </div>
+          <div className="hero-image-div">
+          <img className="hero-image" src={image} alt="image" />
+          </div>
+        </div>
     </div>
-        <div className="text-center my-2">
-            <a className="btn btn-primary hero-btn m-auto btn-lg " href="#shopping">🛍 Shop Now</a>
+        <div className="text-center mb-2">
+            <a className="btn btn-primary m-auto btn-lg " href="#shopping">🛍 Shop Now</a>
         </div>
     </section>
   );

@@ -6,5 +6,5 @@
     background-color: rgba(0, 110, 255, 0.6) !important;
 }
 #mainNav {
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+   background-image: linear-gradient(to right, oklch(41.76% 0.22674 272.836),oklch(57.028% 0.22462 5.214));
 }
