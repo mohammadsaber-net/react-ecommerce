@@ -10,7 +10,7 @@ function SideBar(params){
     return(
         <>
         <div className={`sideBar ${width?'showIt':''}`}>
-            <FontAwesomeIcon className={`sideBarIcon ${width?'text-primary':''}`} onClick={()=>setWidth(!width)} icon={width?faXmark :faBars}/>
+            <FontAwesomeIcon className={`sideBarIcon ${width?'text-primary':'text-info'}`} onClick={()=>setWidth(!width)} icon={width?faXmark :faBars}/>
             <div>
             <div className="side">
             <Link to={"/managment"} onClick={()=>setWidth(false)} className='nav-link d-flex gap-2 justify-content-center align-items-center'>Managment <FontAwesomeIcon icon={faUserShield} /></Link>

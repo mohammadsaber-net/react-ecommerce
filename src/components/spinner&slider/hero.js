@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import image from "../images/bg-hero.png"
 import './hero.css';
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Hero = () => {
      const [hero, setHero] = useState('');
     
