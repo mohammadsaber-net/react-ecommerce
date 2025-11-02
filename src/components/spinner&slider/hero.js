@@ -28,10 +28,10 @@ const Hero = () => {
         displayNextLetter();
       }, []);
   return (
-    <section className=" hero-section d-flex justify-content-around align-items-center flex-column px-3 " id="hero  ">
+    <section className=" hero-section d-flex justify-content-around flex-column px-3 " id="hero  ">
       <span className="overlay"></span>
-    <div className="d-flex">
-        <div className="text-center text-lg-start">
+    <div className="d-flex justify-content-around flex-sm-row flex-column-reverse align-items-center">
+        <div className="text-center flex-1 text-lg-start">
           <h2 className="text-white autotype fw-bold mb-4">
             {hero}
           </h2>
@@ -40,8 +40,8 @@ const Hero = () => {
           </p>
         </div>
         <div className="d-flex hero-image-div">
-          <button className="discount text-white">
-            discount 50%
+            <button className="discount text-white">
+            discount up to 50%
           </button>
           <div className="">
           <img className="hero-image" src={image} alt="image" />
